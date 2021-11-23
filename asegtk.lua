@@ -10,7 +10,7 @@
 -- decorators
 
 --- Metaclass
-AseGTK = {
+local AseGTK = {
 	id = nil,
 	user_interface = nil,
 	first_render = false,
@@ -23,8 +23,6 @@ AseGTK = {
 -- @param cls metamethods of InterfaceTabs
 local constructor = function (cls, ...)
 	local self = setmetatable({}, cls)
-	self:draw()
-	self:render()
 	return self
 end
 
@@ -38,31 +36,33 @@ end
 -------------------------------------------------
 AseGTK.__index = function(self, key)
 	-- to search in current instance
-	if (rawget(self, key)) then
-		return (rawget(self, key))
+	local value_from_self = rawget(self, key)
+	if (value_from_self) then
+		return (value_from_self)
 	end
 	-- to search in class parent
-	if (rawget(AseGTK, key)) then
-		return (rawget(AseGTK, key))
+	local value_from_class = rawget(AseGTK, key)
+	if (value_from_class) then
+		return (value_from_class)
 	end
 
-	-- to search in custom prototype Dialog instance
+	-- to search in instance of Dialog instance
+	--
 	-- get prototype Dialog instance
-	local dialog = rawget(self, "prototype") or {}
+	local dialog = rawget(self, "dialog") or {}
 	-- get value of Dialog instance
-	local value = dialog[key]
-	if (type(value) == "function") then
-		wrapper of the method Dialog
-		return function (self, ...)
-			print(arg)
+	local value_from_dialog = dialog[key]
+	if (type(value_from_dialog) == "function") then
+		-- wrapper of the method Dialog
+		return function (_, ...)
 			if (arg ~= nil) then
-				return value(dialog, table.unpack(arg))
+				return value_from_dialog(dialog, table.unpack(arg))
 			else
-				return value(dialog)
+				return value_from_dialog(dialog)
 			end
 		end
 	end
-	return value
+	return value_from_dialog
 end
 
 --- MetaMethods
@@ -82,12 +82,12 @@ setmetatable(AseGTK, MetaMethods)
 --
 -- @param arg the mode
 -------------------------------------------------
-function AseGTK:draw(arg)
+function AseGTK:draw()
 	local init_dialog = {}
 	-- if type(self.init_dialog.title) == "table" then
 	init_dialog.title = "Titulo"
 	-- end
-	self.prototype = Dialog(init_dialog);
+	self.dialog = _G.Dialog(init_dialog);
 end
 
 -------------------------------------------------
@@ -98,7 +98,7 @@ end
 --
 -- @param arg the mode
 -------------------------------------------------
-function AseGTK:render(arg)
+function AseGTK:render(_)
 	self:show()
 end
 
@@ -111,13 +111,14 @@ end
 -- @param exit_callback a callback function to override the default confirmation
 -- messagebox.
 -- Receives `exit` (`"DONE"` or `"QUIT"`), `data` and `screen`. Must return `true` or `false`.
--- More info at [https://github.com/PedroAlvesV/AbsTK/wiki/Callbacks#exit-callback](https://github.com/PedroAlvesV/AbsTK/wiki/Callbacks#exit-callback)
+-- More info at [https://github.com/PedroAlvesV/AbsTK/wiki/Callbacks#exit-callback]
+-- (https://github.com/PedroAlvesV/AbsTK/wiki/Callbacks#exit-callback)
 --
 -- @within AseGTK
 --
 -- @return  a Wizard.
 -------------------------------------------------
-function AseGTK:new_wizard(title, w, h, exit_callback)
+function AseGTK:add_wizard(title, w, h, exit_callback)
 end
 
 -------------------------------------------------
