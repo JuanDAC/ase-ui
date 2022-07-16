@@ -5,137 +5,140 @@
 -- @author JuanDAC
 -- @license MIT
 -------------------------------------------------
+-- @class AseUI
+AseUI = {
+    menuBar = {},
+    language = nil,
+    LEFT_BASE_MENU_BAR = 230,
+    AXIS_X_BASE_MENU_BAR = 0,
+    TOP_BASE_MENU_BAR = -16
+};
+
+-- @type OptionsComponent
+-- @field #string id - Id of the component (used to identify it)
+-- @field #string text - Text of the component (used to display it)
+-- @field #function onclick - Function to call when the component is clicked
+-- @field #function onchange - Function to call when the component is changed
+-- @field #boolean selected - If the component is selected or not
+-- @field #boolean newrow - If the component is in a new row or not
+-- @field #boolean visible - If the component is visible or not (if not, it will not be displayed)
+-- @field #string option - Option by default of the component (used default selected)
+-- @field #
 
 
--- decorators
+-- @type Components_T
+-- @field #string type - Component type (button, label, etc)
+-- @field #OptionsComponent options - Component options (id, text, selected, onclick)
 
---- Metaclass
-local AseGTK = {
-	id = nil,
-	user_interface = nil,
-	first_render = false,
-	languages_option = nil,
-	init_dialog = {},
-	componets = {},
+-- @type ConfigWindow_T
+-- @field #string title - Window title
+-- @field #function onclouse - Function to execute when the window is closed
+-- @field #Components components - Components to add to the window
+-- @usage local configWindow = { title = "Config", onclouse = function() end, components = {}}
+
+-- @type LanguageOptions_T
+-- @field #string [#string] - Table language to textContent
+-- @usage local language = { ["en"] = "English", ["es"] = "Español" }
+
+-- @function AseUI.New
+-- @descrption Create a new AseUI instance
+-- @param config {configWindow} - AseUI configuration
+AseUI.New = function(static, config)
+    local state = {
+        id = tonumber(os.time()),
+        ui = nil,
+        firstRender = false,
+        initDialog = {},
+        componets = {},
+        maximaze_config = {}
+    };
+
+    local instance = {
+        -- @function AseUI.Constructor
+        -- @param self AseUI instance
+        -- @param config {title, onclouse, componets} - Configuration of the window
+        -- @description Constructor of the window AseUI and create the window with the configuration given in the parameter config and return the window AseUI instance.
+        -- @return AseUI instance
+        Constructor = function(self, config)
+            state.maximaze_config = static:GenetateMaximazeConfig{
+                onclick = self:HandlerMaximaze(),
+                title = config.title
+            };
+            return self
+        end,
+        -- @function AseUI.HandlerMaximaze
+        -- @param self AseUI instance
+        -- @description Handler of the event of the button maximaze.
+        -- @return function handler of the event of the button maximaze within the AseUI instance.
+        HandlerMaximaze = function(self)
+            return function()
+                self:RemoveWindowFromMenuBar();
+                if AXIS_X_BASE_MENU_BAR ~= 0 then
+                    AXIS_X_BASE_MENU_BAR = AXIS_X_BASE_MENU_BAR - state.ui.bounds.width;
+                end
+                self:Close();
+                self:CreateInterface();
+                self:BuildComponents();
+                self:UpdateUIConfig{
+                    bounds = self.maximazed_bounds
+                };
+                self:Render();
+            end
+        end,
+        -- @function AseUI.HandlerMinimaze
+        -- @param self AseUI instance
+        -- @description Remove the window from the menu bar and return the window to the new menu bar.
+        -- @return the new menu bar.
+        RemoveWindowFromMenuBar = function(self)
+            local newMenuBar = {}
+            for _, window in pairs(static.menuBar) do
+                if (state.id ~= window.id) then
+                    table.insert(newMenuBar, window)
+                end
+            end
+            static.menuBar = newMenuBar
+            return static.menuBar
+        end
+    };
+
+    return instance:Constructor(config);
+end
+
+-- @function AseUI.SelectByLanguage
+-- @param self AseUI class 
+-- @param field {LanguageOptions}
+AseUI.SelectByLanguage = function(self, field)
+    if type(field) == "table" then
+        return field[self.language]
+    end
+    return field
+end
+
+AseUI.GenerateMaximazeConfig = function(self, config)
+    return {
+        id = "maximize",
+        text = static:SelectByLanguage(config.title),
+        selected = false,
+        focus = false,
+        onclick = config.onclick
+    }
+end
+
+dlg:entry{
+    id = "user_value",
+    label = "User Value:",
+    text = "Default User"
 }
-
---- constructor: Method init of the Meta class
--- @param cls metamethods of InterfaceTabs
-local constructor = function (cls, ...)
-	local self = setmetatable({}, cls)
-	return self
-end
-
--------------------------------------------------
--- Indexing generally starts at
--- TUI (Curses) or GUI (GTK).
---
--- @within abstk
---
--- @param arg the mode
--------------------------------------------------
-AseGTK.__index = function(self, key)
-	-- to search in current instance
-	local value_from_self = rawget(self, key)
-	if (value_from_self) then
-		return (value_from_self)
-	end
-	-- to search in class parent
-	local value_from_class = rawget(AseGTK, key)
-	if (value_from_class) then
-		return (value_from_class)
-	end
-
-	-- to search in instance of Dialog instance
-	--
-	-- get prototype Dialog instance
-	local dialog = rawget(self, "dialog") or {}
-	-- get value of Dialog instance
-	local value_from_dialog = dialog[key]
-	if (type(value_from_dialog) == "function") then
-		-- wrapper of the method Dialog
-		return function (_, ...)
-			if (arg ~= nil) then
-				return value_from_dialog(dialog, table.unpack(arg))
-			else
-				return value_from_dialog(dialog)
-			end
-		end
-	end
-	return value_from_dialog
-end
-
---- MetaMethods
--- @field __call
-local MetaMethods = {
-	__call = constructor
+dlg:button{
+    id = "confirm",
+    text = "Confirm"
 }
-
--- Set MetaMethods
-setmetatable(AseGTK, MetaMethods)
-
--------------------------------------------------
--- Sets mode to determine whether UI will be drawn,
--- TUI (Curses) or GUI (GTK).
---
--- @within abstk
---
--- @param arg the mode
--------------------------------------------------
-function AseGTK:draw()
-	local init_dialog = {}
-	-- if type(self.init_dialog.title) == "table" then
-	init_dialog.title = "Titulo"
-	-- end
-	self.dialog = _G.Dialog(init_dialog);
+dlg:button{
+    id = "cancel",
+    text = "Cancel"
+}
+dlg:show()
+local data = dlg.data
+if data.confirm then
+    app.alert("The given value is '" .. data.user_value .. "'")
 end
-
--------------------------------------------------
---- Sets mode to determine whether UI will be drawn,
--- TUI (Curses) or GUI (GTK).
---
--- @within abstk
---
--- @param arg the mode
--------------------------------------------------
-function AseGTK:render(_)
-	self:show()
-end
-
--------------------------------------------------
---- Constructs a Wizard.
---
--- @param title the title of the window
--- @param[opt=<code>600</code>] w the width of the window (only used in GUI)
--- @param[opt=<code>w*0.75</code>] h the height of the window (only used in GUI)
--- @param exit_callback a callback function to override the default confirmation
--- messagebox.
--- Receives `exit` (`"DONE"` or `"QUIT"`), `data` and `screen`. Must return `true` or `false`.
--- More info at [https://github.com/PedroAlvesV/AbsTK/wiki/Callbacks#exit-callback]
--- (https://github.com/PedroAlvesV/AbsTK/wiki/Callbacks#exit-callback)
---
--- @within AseGTK
---
--- @return  a Wizard.
--------------------------------------------------
-function AseGTK:add_wizard(title, w, h, exit_callback)
-end
-
--------------------------------------------------
---- Constructs a Screen. 
---
--- @param title the title of the screen
--- @param w the width of the screen (only used in GUI)
--- @param h the height of the screen (only used in GUI)
---
--- @within AseGTK
---
--- @return 	a Screen.
--------------------------------------------------
-function AseGTK:new_screen(title, w, h)
-end
-
-AseGTK()
-
-
-
