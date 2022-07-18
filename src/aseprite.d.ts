@@ -178,6 +178,59 @@ declare global {
     constructor(x: number | IPoint | [number, number], y: number);
   }
 
+  interface DialogOptions {
+    title?: string;
+    onclose?: Function;
+  }
+
+  interface ComponentOptions {
+    id?: string;
+    visible?: boolean;
+    enabled?: boolean;
+    label?: string;
+    text?: string;
+    color?: Color;
+    option?: string;
+    options?: string[];
+    selected?: boolean;
+    focus?: boolean;
+    onclick?: Function;
+    min?: number;
+    max?: number;
+    value?: number;
+    onchange?: Function;
+    onrelease?: Function;
+    open?: boolean;
+    save?: boolean;
+    filename?: string | string[];
+    filetypes?: string[];
+    wait?: boolean;
+    bounds?: Rectangle;
+  }
+
+  /** @customConstructor MyConstructor */
+  interface dialog {
+    show(): dialog;
+    button(componentOptions: ComponentOptions): dialog;
+    check(componentOptions: ComponentOptions): dialog;
+    color(componentOptions: ComponentOptions): dialog;
+    combobox(componentOptions: ComponentOptions): dialog;
+    entry(componentOptions: ComponentOptions): dialog;
+    label(componentOptions: ComponentOptions): dialog;
+    modify(componentOptions: ComponentOptions): dialog;
+    newrow(componentOptions: ComponentOptions): dialog;
+    number(componentOptions: ComponentOptions): dialog;
+    radio(componentOptions: ComponentOptions): dialog;
+    separator(componentOptions: ComponentOptions): dialog;
+    shades(componentOptions: ComponentOptions): dialog;
+    show(componentOptions: ComponentOptions): dialog;
+    close(): dialog;
+    slider(componentOptions: ComponentOptions): dialog;
+    file(componentOptions: ComponentOptions): dialog;
+  }
+
+  const Dialog: (titleOrOptions?: string | DialogOptions) => dialog;
+
   class Selection {
     constructor(rectangle: Rectangle);
     rectangle: Rectangle;

@@ -10,14 +10,15 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
     this._id = Math.random();
     this.init();
   }
+  init(): void {
+    Dialog("juan ve a dormir").show();
+    this._aseTapManager.attach(this);
+  }
   destroy(): void {
     console.log('Method not implemented.');
   }
   show(): void {
     console.log('Method not implemented.');
-  }
-  init(): void {
-    this._aseTapManager.attach(this);
   }
   get id(): number {
     return this._id;

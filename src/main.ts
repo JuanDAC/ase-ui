@@ -1,12 +1,20 @@
 import { AseTapManager } from './AseUI/tap';
 import { AseWindow } from './AseUI/window';
+import { development } from './debug';
 
-Object.keys(app.params);
-for (const element in app.params) {
-  console.log(app.params, element);
+
+class Main {
+    private window: AseWindow;
+    private tapManager: AseTapManager;
+
+    constructor() {
+        this.tapManager = new AseTapManager();
+        this.window = new AseWindow(this.tapManager);
+    }
+
+    public run() {
+        this.window.show();
+    }
 }
-
-const taps = new AseTapManager();
-const window = new AseWindow(taps);
-window.onMinimize();
-console.log('hello world');
+const program = new Main();
+program.run()

@@ -2,7 +2,9 @@ import * as ts from 'typescript';
 import * as tstl from 'typescript-to-lua';
 import { ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import { resolve } from 'node:path';
+import 'dotenv/config';
 
+const NOGUI = JSON.parse(process?.env?.NOGUI ?? 'false') as boolean;
 class Plugin implements tstl.Plugin {
   private prevProcess?: ChildProcessWithoutNullStreams;
   public beforeTransform(program: ts.Program, options: tstl.CompilerOptions, emitHost: tstl.EmitHost) {
@@ -11,7 +13,9 @@ class Plugin implements tstl.Plugin {
       const processName = 'aseprite';
       const mainScript = resolve(__dirname, '../../', luaBundle ?? 'main.lua');
       if (this.prevProcess) this.prevProcess.kill();
-      const aseprite = spawn(processName, ['--shell', '--verbose', '--debug', '--script-param', 'env=development', '--script', mainScript]);
+      const args = ['--verbose', '--debug', '--script-param', 'env=development', '--script', mainScript];
+      NOGUI && args.push('--shell')
+      const aseprite = spawn(processName, args);
       this.prevProcess = aseprite;
 
       console.log('-'.repeat(80));

@@ -28,6 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "dota-lua-types": "^4.6.1",
+    "dotenv": "^16.0.1",
     "eslint": "^8.20.0",
     "eslint-plugin-tsdoc": "^0.2.16",
     "ts-node": "^10.9.1",
