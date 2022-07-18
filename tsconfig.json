@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext"],
+    "moduleResolution": "node",
+    "strict": true,
+    "types": ["dota-lua-types", "@types/node"],
+    "resolveJsonModule": true,
+    "plugins": [{ "transform": "dota-lua-types/transformer" }]
+  },
+  "tstl": {
+    "luaPlugins": [{ "name": "./luaPlugins/serverAseprite/index.ts" }],
+    "luaTarget": "5.4",
+    "extension": "lua",
+    "noImplicitSelf": true,
+    "tstlVerbose": true,
+    "luaLibImport": "inline",
+    "luaBundle": "./dist/app.lua",
+    "luaBundleEntry": "./src/main.ts"
+  }
+}
