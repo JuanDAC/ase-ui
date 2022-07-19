@@ -1,3 +1,5 @@
+/* eslint-disable tsdoc/syntax */
+/* eslint-disable @typescript-eslint/ban-types */
 declare global {
   enum AniDir {
     FORWARD = 0,
@@ -208,28 +210,31 @@ declare global {
     bounds?: Rectangle;
   }
 
-  /** @customConstructor MyConstructor */
-  interface dialog {
-    show(): dialog;
-    button(componentOptions: ComponentOptions): dialog;
-    check(componentOptions: ComponentOptions): dialog;
-    color(componentOptions: ComponentOptions): dialog;
-    combobox(componentOptions: ComponentOptions): dialog;
-    entry(componentOptions: ComponentOptions): dialog;
-    label(componentOptions: ComponentOptions): dialog;
-    modify(componentOptions: ComponentOptions): dialog;
-    newrow(componentOptions: ComponentOptions): dialog;
-    number(componentOptions: ComponentOptions): dialog;
-    radio(componentOptions: ComponentOptions): dialog;
-    separator(componentOptions: ComponentOptions): dialog;
-    shades(componentOptions: ComponentOptions): dialog;
-    show(componentOptions: ComponentOptions): dialog;
-    close(): dialog;
-    slider(componentOptions: ComponentOptions): dialog;
-    file(componentOptions: ComponentOptions): dialog;
+  /** @customConstructor ComponentProperties */
+  class ComponentProperties implements ComponentOptions {
+    constructor(componentProperties: ComponentOptions);
   }
 
-  const Dialog: (titleOrOptions?: string | DialogOptions) => dialog;
+  /** @customConstructor Dialog */
+  class Dialog {
+    constructor(titleOrOptions?: string | DialogOptions);
+    button(componentOptions: ComponentOptions): Dialog;
+    check(componentOptions: ComponentOptions): Dialog;
+    color(componentOptions: ComponentOptions): Dialog;
+    combobox(componentOptions: ComponentOptions): Dialog;
+    entry(componentOptions: ComponentOptions): Dialog;
+    label(componentOptions: ComponentOptions): Dialog;
+    modify(componentOptions: ComponentOptions): Dialog;
+    newrow(componentOptions: ComponentOptions): Dialog;
+    number(componentOptions: ComponentOptions): Dialog;
+    radio(componentOptions: ComponentOptions): Dialog;
+    separator(componentOptions: ComponentOptions): Dialog;
+    shades(componentOptions: ComponentOptions): Dialog;
+    show(componentOptions: ComponentOptions): Dialog;
+    close(): Dialog;
+    slider(componentOptions: ComponentOptions): Dialog;
+    file(componentOptions: ComponentOptions): Dialog;
+  }
 
   class Selection {
     constructor(rectangle: Rectangle);
@@ -265,7 +270,7 @@ declare global {
     colorMode: number;
     spec: ImageSpec;
     cel: Cel;
-    bytes: any;
+    bytes: unknown;
     rowStride: number;
     clear(color?: Color): void;
     darwPixel(x: number, y: number, color: Color): void;
@@ -554,6 +559,7 @@ declare global {
       export const sprite: Sprite;
     }
   }
+
 }
 
 export default global;

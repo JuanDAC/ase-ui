@@ -4,6 +4,7 @@ import { AseTapMaximize, AseTapMinimaze, AseTapSubject } from './interface';
 
 export class AseTapManager implements AseTapSubject {
   private _register: Map<AseDialog, AseDialog> = new Map();
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
   attach(window: AseTapMaximize | AseTapMinimaze): void {
     if (this._register.has(window)) {
