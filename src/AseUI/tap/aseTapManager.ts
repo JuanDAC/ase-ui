@@ -4,8 +4,17 @@ import { AseTapMaximize, AseTapMinimaze, AseTapSubject } from './interface';
 
 export class AseTapManager implements AseTapSubject {
   private _register: Map<AseDialog, AseDialog> = new Map();
+  static _instance: Map<string, AseTapManager> = new Map();
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
+  constructor(id: string) {
+    if (!AseTapManager._instance.has(id)) {
+      AseTapManager._instance.set(id, this);
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return AseTapManager._instance.get(id)!;
+  }
+
   attach(window: AseTapMaximize | AseTapMinimaze): void {
     if (this._register.has(window)) {
       return;

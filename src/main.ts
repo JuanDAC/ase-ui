@@ -8,8 +8,9 @@ class Main {
   private tapManager: AseTapManager;
 
   constructor() {
-    this.tapManager = new AseTapManager();
+    this.tapManager = new AseTapManager('ASEUI_tap_manager');
     this.window = new AseWindow(this.tapManager);
+    program.run();
   }
 
   public run() {
@@ -39,4 +40,3 @@ class Main {
   }
 }
 const program = new Main();
-program.run();
