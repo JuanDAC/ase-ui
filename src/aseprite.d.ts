@@ -183,6 +183,7 @@ declare global {
   interface DialogOptions {
     title?: string;
     onclose?: Function;
+    position?: Position;
   }
 
   interface ComponentOptions {
@@ -559,7 +560,6 @@ declare global {
       export const sprite: Sprite;
     }
   }
-
 }
 
 export default global;

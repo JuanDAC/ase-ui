@@ -1,6 +1,7 @@
+import { AseDialog } from '../interfece';
 import { ComponentFormart } from './interface';
 
-type File = {
+type FileAttributes = {
   id: string;
   label?: string;
   visible?: boolean;
@@ -9,10 +10,10 @@ type File = {
   save?: boolean;
   filename?: string | string[];
   filetype?: string[];
-  onchange?: (file: File) => void;
+  onchange?: (self: AseDialog, ...arg: unknown[]) => () => void;
 };
 
-export const File = ({ id, label, visible, title, open, save, filename, filetype, onchange }: File): ComponentFormart => {
+export const File = ({ id, label, visible, title, open, save, filename, filetype, onchange }: FileAttributes): ComponentFormart => {
   return {
     tag: 'file',
     attributes: {

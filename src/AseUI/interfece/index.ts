@@ -1,4 +1,4 @@
-import { ComponentFormart } from '../components/interface';
+import { AppAttributes } from '../components/app';
 
 export interface AseDialogConfig {
   title: object | string;
@@ -12,12 +12,12 @@ export interface AseDialog {
   get ui(): Dialog;
   get dialogOptions(): DialogOptions;
   get components(): unknown;
+  set template(components: AppAttributes);
   createUI(): void;
   mountComponents(): void;
   hide(): void;
   render(): void;
   show(): void;
-  init(config: AseDialogConfig): void;
-  template(components: ComponentFormart[]): void;
+  init(): void;
   destroy(): void;
 }

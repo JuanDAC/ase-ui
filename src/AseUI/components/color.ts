@@ -1,3 +1,4 @@
+import { AseDialog } from '../interfece';
 import { ComponentFormart } from './interface';
 
 type ColorAttributes = {
@@ -5,7 +6,7 @@ type ColorAttributes = {
   label?: string;
   color?: Color;
   visible?: boolean;
-  onchange?: (color: Color) => void;
+  onchange?: (self: AseDialog, ...arg: unknown[]) => () => void;
 };
 
 export const Color = ({ id, label, color, visible, onchange }: ColorAttributes): ComponentFormart => {

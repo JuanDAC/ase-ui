@@ -1,3 +1,4 @@
+import { AseDialog } from '../interfece';
 import { ComponentFormart } from './interface';
 
 type ButtonAttributes = {
@@ -7,10 +8,10 @@ type ButtonAttributes = {
   visible?: boolean;
   label?: string;
   selected?: boolean;
-  onClick?: () => void;
+  onclick?: (self: AseDialog, ...arg: unknown[]) => () => void;
 };
 
-export const Button = ({ id, text, selected, focus, visible, label, onClick }: ButtonAttributes): ComponentFormart => {
+export const Button = ({ id, text, selected, focus, visible, label, onclick }: ButtonAttributes): ComponentFormart => {
   return {
     tag: 'button',
     attributes: {
@@ -19,7 +20,7 @@ export const Button = ({ id, text, selected, focus, visible, label, onClick }: B
       label,
       focus,
       visible,
-      onClick,
+      onclick,
       selected,
     },
   };

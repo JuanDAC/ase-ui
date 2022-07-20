@@ -1,3 +1,4 @@
+import { AseDialog } from '../interfece';
 import { ComponentFormart } from './interface';
 
 type ComboboxAttributes = {
@@ -7,10 +8,10 @@ type ComboboxAttributes = {
   option?: string;
   options?: string[];
   label?: string;
-  onChange?: (value: string) => void;
+  onchange?: (self: AseDialog, ...arg: unknown[]) => () => void;
 };
 
-export const Combobox = ({ id, option, options, focus, visible, label, onChange }: ComboboxAttributes): ComponentFormart => {
+export const Combobox = ({ id, option, options, focus, visible, label, onchange }: ComboboxAttributes): ComponentFormart => {
   return {
     tag: 'combobox',
     attributes: {
@@ -20,7 +21,7 @@ export const Combobox = ({ id, option, options, focus, visible, label, onChange 
       option,
       options,
       label,
-      onChange,
+      onchange,
     },
   };
 };

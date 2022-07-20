@@ -1,3 +1,4 @@
+import { AseDialog } from '../interfece';
 import { ComponentFormart } from './interface';
 
 type NumberAttributes = {
@@ -6,7 +7,7 @@ type NumberAttributes = {
   text?: string;
   decimals?: number;
   visible?: boolean;
-  onchange?: (value: string) => void;
+  onchange?: (self: AseDialog, ...arg: unknown[]) => () => void;
 };
 
 export const Number = ({ id, label, text, decimals, visible, onchange }: NumberAttributes): ComponentFormart => {

@@ -1,4 +1,4 @@
-import { ComponentFormart } from '../components/interface';
+import { AppAttributes } from '../components/app';
 import { AseDialog } from '../interfece';
 import { AseTapMaximize, AseTapObserver } from './interface';
 
@@ -6,6 +6,9 @@ export class AseTap implements AseDialog, AseTapMaximize, AseTapObserver {
   private _id: number;
   constructor() {
     this._id = Math.random();
+  }
+  set template(components: AppAttributes) {
+    throw new Error('Method not implemented.');
   }
   get ui(): Dialog {
     throw new Error('Method not implemented.');
@@ -23,9 +26,6 @@ export class AseTap implements AseDialog, AseTapMaximize, AseTapObserver {
     throw new Error('Method not implemented.');
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  template(components: ComponentFormart[]): void {
-    throw new Error('Method not implemented.');
-  }
   destroy(): void {
     console.log('Method not implemented.');
   }
