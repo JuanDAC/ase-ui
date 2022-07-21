@@ -4,6 +4,8 @@ import { ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import { resolve } from 'node:path';
 import 'dotenv/config';
 
+// TODO: Export the plugin as a single repository (not a module) because we need to use with the aseprite package manager like plugin.
+
 const NOGUI = JSON.parse(process?.env?.NOGUI ?? 'false') as boolean;
 class Plugin implements tstl.Plugin {
   private prevProcess?: ChildProcessWithoutNullStreams;

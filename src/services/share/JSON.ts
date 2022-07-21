@@ -1,3 +1,6 @@
+// TODO: create this file like a library and export it as a module of dependencies like aseprite package manager.
+// with self repository as aseprite package manager.
+
 const _WHITESPACE = Array.from({ length: 512 }, () => ' ').join('');
 export class JSON {
   static stringify(data: unknown, indent?: string) {

@@ -11,13 +11,17 @@
     "dev:test": "aseprite --script-param env=development --script `pwd`/dist/app.lua",
     "lint": "eslint -f unix \"src/**/*.{ts,tsx}\""
   },
+  "author": {
+    "name": "JuanDAC",
+    "email": "juanavila12.0308@gmail.com",
+    "url": "https://www.linkedin.com/in/juandac/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JuanDAC/aseprite_ui.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "GNU GPLv3",
   "bugs": {
     "url": "https://github.com/JuanDAC/aseprite_ui/issues"
   },

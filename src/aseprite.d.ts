@@ -1,5 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 
+// TODO: publich and create repository of this type definitions for Aseprite in npm package
+
 /* eslint-disable @typescript-eslint/ban-types */
 declare global {
   enum AniDir {

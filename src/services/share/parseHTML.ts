@@ -1,3 +1,7 @@
+// TODO: create this file like a library and export it as a module of dependencies like aseprite package manager.
+// with self repository as aseprite package manager.
+// TODO cahnge the REGULAR_EXPRESSION to a PATTERN of lua support.
+
 const VOID_TAGS = ['slider', 'file', 'shades', 'newrow', 'color'];
 interface ComponentFromHTML {
   text?: string;
@@ -45,7 +49,7 @@ export const parseHTML = (input: string) => {
         }) ||
         // Parse a closing tag
         // eslint-disable-next-line no-useless-escape
-        pull(new RegExp('^<\/([a-zA-Z][a-zA-Z0-9\-]*)>'), (tag: string) => {
+        pull(new RegExp('^</([a-zA-Z][a-zA-Z0-9-]*)>'), (tag: string) => {
           if (cursor.tag?.toLowerCase() !== tag.toLowerCase()) {
             throw new Error("Closing tag doesn't match");
           }
@@ -65,7 +69,7 @@ export const parseHTML = (input: string) => {
   const parse_attributes = (cursor: ComponentFromHTML) => {
     while (
       // eslint-disable-next-line no-useless-escape
-      pull(new RegExp('^\\s+([a-zA-Z][a-zA-Z0-9\-]+)="([^"]*)"'), (name: string, value: string) => {
+      pull(new RegExp('^\\s+([a-zA-Z][a-zA-Z0-9-]+)="([^"]*)"'), (name: string, value: string) => {
         cursor.attributes ??= {};
         cursor.attributes[name] = value;
       })

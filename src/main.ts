@@ -2,6 +2,9 @@ import { App, Button, Combobox, Separator } from './AseUI/components';
 import { AseComponent } from './AseUI/window/aseComponent';
 import { JSON } from './services/share/JSON';
 
+// TODO: Add aseprite as a dependency
+// TODO: Import all the dependencies for the AseUI here and export them
+
 class Main extends AseComponent {
   constructor() {
     super();

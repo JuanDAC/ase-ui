@@ -1,3 +1,6 @@
+// TODO: create this file like a library and export it as a module of dependencies like aseprite package manager.
+// with self repository as aseprite package manager.
+
 export const deepCopy = (obj: any): any => {
   if (typeof obj === 'object' && Array.isArray(obj)) {
     return [...obj].map((item) => deepCopy(item));
