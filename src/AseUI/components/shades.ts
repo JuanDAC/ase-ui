@@ -1,12 +1,11 @@
-import { AseDialog } from '../interfece';
-import { ComponentFormart } from './interface';
+import { ComponentFormart, OnEvent } from './interface';
 
 type ShadesAttributes = {
   id: string;
   label?: string;
   mode?: 'pick' | 'sort';
   colors?: Color[];
-  onclick?: (self: AseDialog, ...arg: unknown[]) => () => void;
+  onclick?: OnEvent;
 };
 
 export const Shades = ({ id, label, mode, colors, onclick }: ShadesAttributes): ComponentFormart => {

@@ -1,11 +1,14 @@
 import { AppAttributes } from '../components/app';
-import { AseDialog } from '../interfece';
+import { AseDialog } from '../interface';
 import { AseTapMaximize, AseTapObserver } from './interface';
 
 export class AseTap implements AseDialog, AseTapMaximize, AseTapObserver {
   private _id: number;
   constructor() {
     this._id = Math.random();
+  }
+  modify(id: string, key: string, value: any): void {
+    throw new Error('Method not implemented.');
   }
   set template(components: AppAttributes) {
     throw new Error('Method not implemented.');

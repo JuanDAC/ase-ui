@@ -13,6 +13,7 @@ export interface AseDialog {
   get dialogOptions(): DialogOptions;
   get components(): unknown;
   set template(components: AppAttributes);
+  modify(id: string, key: string, value: any): void;
   createUI(): void;
   mountComponents(): void;
   hide(): void;

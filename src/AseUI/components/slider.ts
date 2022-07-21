@@ -1,5 +1,4 @@
-import { AseDialog } from '../interfece';
-import { ComponentFormart } from './interface';
+import { ComponentFormart, OnEvent } from './interface';
 
 type SliderAttributes = {
   id: string;
@@ -7,8 +6,8 @@ type SliderAttributes = {
   min?: number;
   max?: number;
   value?: number;
-  onchange?: (self: AseDialog, ...arg: unknown[]) => () => void;
-  onrelease?: (self: AseDialog, ...arg: unknown[]) => () => void;
+  onchange?: OnEvent;
+  onrelease?: OnEvent;
   visible?: boolean;
 };
 

@@ -1,9 +1,9 @@
-import { ComponentFormart } from './interface';
+import { ComponentFormart, OnEvent} from './interface';
 
 export type AppAttributes = {
   children: ComponentFormart[];
   title?: string;
-  onclose?: () => void;
+  onclose?: OnEvent;
   position?: Position;
 };
 

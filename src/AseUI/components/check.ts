@@ -1,4 +1,4 @@
-import { ComponentFormart } from './interface';
+import { ComponentFormart, OnEvent } from './interface';
 
 type CheckAttributes = {
   id: string;
@@ -6,7 +6,7 @@ type CheckAttributes = {
   visible?: boolean;
   label?: string;
   selected?: boolean;
-  onclick?: (self: Dialog, ...arg: unknown[]) => () => void;
+  onclick?: OnEvent;
 };
 
 export const Check = ({ id, text, selected, visible, label, onclick }: CheckAttributes): ComponentFormart => {

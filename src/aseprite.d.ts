@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+
 /* eslint-disable @typescript-eslint/ban-types */
 declare global {
   enum AniDir {
@@ -182,7 +183,7 @@ declare global {
 
   interface DialogOptions {
     title?: string;
-    onclose?: Function;
+    onclose?: (this: any) => void;
     position?: Position;
   }
 
@@ -218,6 +219,7 @@ declare global {
 
   /** @customConstructor Dialog */
   class Dialog {
+    data: { [id: string]: any; ok: boolean };
     constructor(titleOrOptions?: string | DialogOptions);
     button(componentOptions: ComponentOptions): Dialog;
     check(componentOptions: ComponentOptions): Dialog;

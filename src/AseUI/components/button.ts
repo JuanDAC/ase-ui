@@ -1,5 +1,4 @@
-import { AseDialog } from '../interfece';
-import { ComponentFormart } from './interface';
+import { ComponentFormart, OnEvent } from './interface';
 
 type ButtonAttributes = {
   id: string;
@@ -8,7 +7,7 @@ type ButtonAttributes = {
   visible?: boolean;
   label?: string;
   selected?: boolean;
-  onclick?: (self: AseDialog, ...arg: unknown[]) => () => void;
+  onclick?: OnEvent;
 };
 
 export const Button = ({ id, text, selected, focus, visible, label, onclick }: ButtonAttributes): ComponentFormart => {

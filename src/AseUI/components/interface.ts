@@ -6,3 +6,5 @@ export interface ComponentFormart {
   tag?: string;
   attributes?: { [key: string]: unknown };
 }
+
+export type OnEvent = (this: any, ...arg: any[]) => void;

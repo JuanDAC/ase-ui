@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { deepCopy } from '../../services/share/deppCopy';
 import { JSON } from '../../services/share/JSON';
 import { AppAttributes } from '../components/app';
-import { AseDialog, AseDialogConfig } from '../interfece';
+import { OnEvent } from '../components/interface';
+import { AseDialog } from '../interface';
 import { AseTapManager } from '../tap';
 import { AseTapMinimaze } from '../tap/interface';
 
@@ -19,34 +21,51 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
     this._template = components;
   }
   get ui(): Dialog {
+    if (this._ui == null) this.createUI();
     return this._ui;
   }
+
+  get state(): Dialog['data'] {
+    return this.ui.data;
+  }
+  get ok(): Dialog['data']['ok'] {
+    return !!this.ui.data.ok;
+  }
+
   get dialogOptions(): DialogOptions {
-    const { title, onclose, position } = this._template;
+    const { title, onclose, position } = this.components;
     return {
       title,
       onclose,
       position,
     };
   }
-  get components(): unknown {
-    throw new Error('Method not implemented.');
+  get components(): AppAttributes {
+    return deepCopy(this._template);
   }
   createUI(): void {
     this._ui = new Dialog(this.dialogOptions);
   }
+  bindEvents(key: string, value: unknown, attributes: { [key: string]: any }): void {
+    if (attributes && typeof value === 'function' && key.startsWith('on')) {
+      const onEvent: OnEvent = value as OnEvent;
+      attributes[key as keyof typeof attributes] = onEvent(this);
+    }
+  }
+  parseComponents(attributes: object): (this: any, entry: [string, unknown]) => void {
+    return ([key, value]) => {
+      this.bindEvents(key, value, attributes);
+    };
+  }
   mountComponents(): void {
-    const { children } = this._template;
+    const { children } = this.components;
     children.map((component) => {
       const { tag } = component;
-      print(tag);
-      if (tag && typeof this._ui[tag as keyof typeof this._ui] === 'function') {
-        Object.entries(component.attributes ?? {}).forEach(([key, value]) => {
-          if (component && typeof value === 'function') {
-            component.attributes![key as keyof typeof component.attributes] = value(null, this);
-          }
-        });
-        this._ui[tag as keyof typeof this._ui]({ ...component.attributes });
+      const nameMethod: keyof Dialog = tag as keyof Dialog;
+      if (tag && typeof this.ui[nameMethod] === 'function') {
+        const method = this.ui[nameMethod] as (this: Dialog, config: object) => Dialog;
+        /* Object.entries(component.attributes ?? {}).forEach(this.parseComponents(component.attributes ?? {})); */
+        method.call(this.ui, { ...component.attributes });
       }
     });
   }
@@ -54,10 +73,10 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
     this._aseTapManager.attach(this);
   }
   destroy(): void {
-    this._ui.close();
+    this.ui.close();
   }
   show(): void {
-    this._ui.show({ wait: false });
+    this.ui.show({ wait: false });
   }
   get id(): number {
     return this._id;
@@ -66,9 +85,19 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
     this._aseTapManager.notyfy(this);
   }
   hide(): void {
-    console.log('Method not implemented.');
+    this.ui.close();
   }
   render(): void {
-    console.log('Method not implemented.');
+    this.createUI();
+    this.mountComponents();
+    this.show();
+  }
+
+  modify(id: string, key: string, value: any): void {
+    if (Object.keys(this.state).includes(id)) {
+      this.ui.modify({ id, [key]: value });
+    } else {
+      console.error(`${id} not found`);
+    }
   }
 }

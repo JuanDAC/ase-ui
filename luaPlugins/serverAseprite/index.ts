@@ -13,13 +13,14 @@ class Plugin implements tstl.Plugin {
       const processName = 'aseprite';
       const mainScript = resolve(__dirname, '../../', luaBundle ?? 'main.lua');
       if (this.prevProcess) this.prevProcess.kill();
-      const args = ['--verbose', '--debug', '--script-param', 'env=development', '--script', mainScript];
-      NOGUI && args.push('--shell')
+      const args = ['--debug', '--script-param', 'env=development', '--script', mainScript];
+      NOGUI && args.push('--shell');
       const aseprite = spawn(processName, args);
       this.prevProcess = aseprite;
 
       console.log('-'.repeat(80));
-      console.log(processName.toUpperCase(), ' with procees ID: ', aseprite.pid);
+      const title = ` ${processName.toUpperCase()} with procees ID: ${aseprite.pid}`;
+      console.log('|', title, ' '.repeat(75 - title.length), '|');
       console.log('-'.repeat(80));
 
       aseprite.stdout.on('data', (data) => {

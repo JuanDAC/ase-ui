@@ -1,5 +1,4 @@
-import { AseDialog } from '../interfece';
-import { ComponentFormart } from './interface';
+import { ComponentFormart, OnEvent } from './interface';
 
 type RadioArguments = {
   id: string;
@@ -7,7 +6,7 @@ type RadioArguments = {
   text?: string;
   selected?: boolean;
   visible?: boolean;
-  onclick?: (self: AseDialog, ...arg: unknown[]) => () => void;
+  onclick?: OnEvent;
 };
 
 export const Radio = ({ id, label, text, selected, visible, onclick }: RadioArguments): ComponentFormart => {

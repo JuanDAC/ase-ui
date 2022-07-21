@@ -1,4 +1,4 @@
-import { AseDialog } from '../interfece';
+import { AseDialog } from '../interface';
 import { AseTap } from './aseTap';
 import { AseTapMaximize, AseTapMinimaze, AseTapSubject } from './interface';
 
