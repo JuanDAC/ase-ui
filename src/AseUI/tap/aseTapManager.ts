@@ -1,51 +1,76 @@
-import { AseDialog } from '../interface';
-import { AseTap } from './aseTap';
-import { AseTapMaximize, AseTapMinimaze, AseTapSubject } from './interface';
+import { App, Button } from '../components';
+import { AseWindow } from '../window';
 
-export class AseTapManager implements AseTapSubject {
-  private _register: Map<AseDialog, AseDialog> = new Map();
-  static _instance: Map<string, AseTapManager> = new Map();
+export class AseTapManager {
+  private _register: Map<string, AseWindow> = new Map();
+  static _instance: AseTapManager | null = null;
+  private window!: AseWindow;
+  private taps: Set<string> = new Set();
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(id: string) {
-    if (!AseTapManager._instance.has(id)) {
-      AseTapManager._instance.set(id, this);
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return AseTapManager._instance.get(id)!;
+  private constructor() {
+    this.window = new AseWindow(this);
   }
 
-  attach(window: AseTapMaximize | AseTapMinimaze): void {
-    if (this._register.has(window)) {
+  static singleton(): AseTapManager {
+    if (AseTapManager._instance == null) {
+      AseTapManager._instance = new AseTapManager();
+    }
+
+    return AseTapManager._instance as AseTapManager;
+  }
+
+  attach(window: AseWindow): void {
+    const { title } = window.dialogOptions;
+    if (!title || title === 'taps') {
       return;
     }
-    this._register.set(window, new AseTap());
-  }
-  detach(activator: AseTapMaximize | AseTapMinimaze): void {
-    if (!this._register.has(activator)) {
+    if (this._register.has(title)) {
       return;
     }
-    const [window, tap] = this.findByWindow(activator);
-    tap?.hide();
-    tap?.destroy();
-    window && this._register.delete(window);
+    this._register.set(title, window);
   }
-  findByWindow(activator: AseDialog): [AseDialog?, AseDialog?] {
-    return [...this._register.entries()].find(([{ id }]) => id === activator.id) ?? [];
-  }
-  findByTap(activator: AseDialog): [AseDialog?, AseDialog?] {
-    return [...this._register.entries()].find(([_, { id }]) => id === activator.id) ?? [];
-  }
-  notyfy(activator: AseTapMaximize | AseTapMinimaze): void {
-    if ('onMinimize' in activator) {
-      const [window, tap] = this.findByWindow(activator);
-      window?.hide();
-      tap?.show();
+  detach(activator: AseWindow): void {
+    const { title } = activator.dialogOptions;
+    if (!title || title === 'taps') {
+      return;
     }
-    if ('onMaximize' in activator) {
-      const [window, tap] = this.findByTap(activator);
-      tap?.hide();
-      window?.show();
+    if (!this._register.has(title)) {
+      return;
     }
+    // remove botton from tap minimized
+    this._register.delete(title);
+  }
+
+  initialState() {
+    return;
+  }
+
+  run() {
+    this.window.template = App({
+      title: 'Taps',
+      children: [...this.taps].map((title) =>
+        Button({
+          id: `tap-${title}`,
+          text: title,
+          onclick: () => this.maximize(title),
+        })
+      ),
+    });
+  }
+
+  maximize(title: string): void {
+    this.window.hide();
+    this.taps.delete(title);
+    const window = this._register.get(title) as AseWindow;
+    window.render();
+    this.run();
+    this.window.render();
+  }
+
+  notyfy(title: string): void {
+    if (this.window.active) this.window.hide();
+    this.taps.add(title);
+    this.run();
+    this.window.render();
   }
 }

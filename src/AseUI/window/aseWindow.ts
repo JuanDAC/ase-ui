@@ -12,6 +12,9 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   private _ui!: Dialog;
   private _template: AppAttributes = { children: [] };
   private _aseTapManager: AseTapManager;
+  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+  private _active: boolean = false;
+  private _position: Rectangle | null = null;
   constructor(aseTapManager: AseTapManager) {
     this._aseTapManager = aseTapManager;
     this._id = Math.random();
@@ -23,6 +26,10 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   get ui(): Dialog {
     if (this._ui == null) this.createUI();
     return this._ui;
+  }
+
+  get active(): boolean {
+    return this._active;
   }
 
   get state(): Dialog['data'] {
@@ -70,26 +77,33 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
     });
   }
   init(): void {
-    this._aseTapManager.attach(this);
+    return;
   }
   destroy(): void {
+    this._position = this._ui.bounds;
     this.ui.close();
+    this._active = false;
   }
   show(): void {
     this.ui.show({ wait: false });
+    this._active = true;
+    if (this._position) {
+      this._ui.bounds = this._position;
+    }
   }
   get id(): number {
     return this._id;
   }
   onMinimize(): void {
-    this._aseTapManager.notyfy(this);
+    this._aseTapManager.notyfy(this.dialogOptions.title as string);
   }
   hide(): void {
-    this.ui.close();
+    this.destroy();
   }
   render(): void {
     this.createUI();
     this.mountComponents();
+    this._aseTapManager.attach(this);
     this.show();
   }
 

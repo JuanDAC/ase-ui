@@ -220,6 +220,7 @@ declare global {
   /** @customConstructor Dialog */
   class Dialog {
     data: { [id: string]: any; ok: boolean };
+    bounds: Rectangle;
     constructor(titleOrOptions?: string | DialogOptions);
     button(componentOptions: ComponentOptions): Dialog;
     check(componentOptions: ComponentOptions): Dialog;

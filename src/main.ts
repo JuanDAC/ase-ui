@@ -1,28 +1,21 @@
 import { App, Button, Combobox, Separator } from './AseUI/components';
-import { State } from './AseUI/state';
-import { AseTapManager } from './AseUI/tap';
-import { AseWindow } from './AseUI/window';
-import { development } from './debug';
+import { AseComponent } from './AseUI/window/aseComponent';
 import { JSON } from './services/share/JSON';
 
-class Main {
-  private window: AseWindow;
-  private tapManager: AseTapManager;
-  private state: State;
-
+class Main extends AseComponent {
   constructor() {
-    this.tapManager = new AseTapManager('ASEUI_tap_manager');
-    this.window = new AseWindow(this.tapManager);
-    this.state = new State(this.window);
-    this.run();
+    super();
   }
 
-  public run() {
-    this.state.initial('ASEUI_languages', 'visible', true);
+  initialState() {
+    this.state.initial('ASEUI_languages', 'visible', false);
+  }
+
+  run() {
     this.window.template = App({
       title: 'ASEUI',
       onclose: () => {
-        console.log('close');
+        return;
       },
       children: [
         Separator({
@@ -53,7 +46,8 @@ class Main {
           selected: false,
           visible: true,
           onclick: () => {
-            console.log('Apply ');
+            this.window.onMinimize();
+            this.window.hide();
           },
         }),
         Button({
@@ -65,7 +59,6 @@ class Main {
         }),
       ],
     });
-    this.window.render();
   }
 }
 const program = new Main();
