@@ -1,7 +1,6 @@
-import { App, Button, Check, Combobox, Entry, Label, Newrow, Separator } from './AseUI/components';
+import { App, Button, Check, Entry, Newrow, Separator } from './AseUI/components';
 import { ComponentFormart, OnEvent } from './AseUI/components/interface';
 import { AseComponent } from './AseUI/window/aseComponent';
-import { JSON } from './services/share/JSON';
 
 /* class Main extends AseComponent {
   constructor() {
@@ -63,15 +62,33 @@ import { JSON } from './services/share/JSON';
   }
 } */
 
+class TasksMetadata {
+  done: boolean;
+  index: number;
+  static count = 0;
+  constructor({ done = false } = {}) {
+    this.done = done;
+    this.index = ++TasksMetadata.count;
+  }
+  toggle() {
+    this.done = !this.done;
+    return this;
+  }
+}
+
+type Tasks = { [key: string]: TasksMetadata };
+
+type ValuesLocalState = Tasks;
+
 class Main extends AseComponent {
-  localstate!: Map<string, any>;
+  localstate!: Map<string, ValuesLocalState>;
   constructor() {
     super();
   }
 
   initialState() {
     this.localstate = new Map();
-    this.localstate.set('tasks', []);
+    this.localstate.set('tasks', {});
   }
 
   run() {
@@ -99,9 +116,19 @@ class Main extends AseComponent {
           id: 'task-list',
           text: 'Tasks:',
         }),
-        ...(Object.entries(this.localstate.get('tasks') ?? {}) as any[]).map(this.createTask()).flat(),
+        ...this.tasks,
       ],
     });
+  }
+
+  get tasks() {
+    return (
+      Object.entries((this.localstate.get('tasks') ?? {}) as Tasks)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        .sort(([_, a], [__, b]) => a.index - b.index)
+        .map(this.createTask())
+        .flat()
+    );
   }
 
   addTask(): OnEvent {
@@ -109,7 +136,7 @@ class Main extends AseComponent {
       const name: string = this.window.state.task ?? '';
       const previouTasks: object = this.localstate.get('tasks') ?? {};
       if (Object.keys(previouTasks).includes(name) || name.replaceAll(' ', '').length === 0) return;
-      this.localstate.set('tasks', { ...(this.localstate.get('tasks') || {}), [name]: false });
+      this.localstate.set('tasks', { ...(this.localstate.get('tasks') || {}), [name]: new TasksMetadata({ done: false }) });
       this.update();
     };
   }
@@ -121,14 +148,15 @@ class Main extends AseComponent {
       this.update();
     };
   }
-  createTask(): (this: any, value: any, index: number, array: any[]) => ComponentFormart[] {
-    return ([name, done]: [string, boolean], index: number) => [
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  createTask(): (this: any, value: [string, TasksMetadata], index: number, array: [string, TasksMetadata][]) => ComponentFormart[] {
+    return ([name, taskConfig]: [string, TasksMetadata], index: number) => [
       Check({
         id: `task-${name}-${index}`,
         text: `${index}: ${name}`,
-        selected: done,
+        selected: taskConfig.done,
         onclick: () => {
-          this.localstate.set('tasks', { ...(this.localstate.get('tasks') || {}), [name]: !done });
+          taskConfig.toggle();
           this.update();
         },
       }),
@@ -139,9 +167,9 @@ class Main extends AseComponent {
       }),
       Button({
         id: `remove-task-${name}-${index}`,
-        text: done ? 'TODO' : 'DONE',
+        text: taskConfig.done ? 'TODO' : 'DONE',
         onclick: () => {
-          this.localstate.set('tasks', { ...(this.localstate.get('tasks') || {}), [name]: !done });
+          taskConfig.toggle();
           this.update();
         },
       }),
