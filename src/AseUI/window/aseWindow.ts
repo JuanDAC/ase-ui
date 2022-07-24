@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { deepCopy } from '../../services/share/deppCopy';
-import { JSON } from '../../services/share/JSON';
 import { AppAttributes } from '../components/app';
 import { OnEvent } from '../components/interface';
 import { AseDialog } from '../interface';

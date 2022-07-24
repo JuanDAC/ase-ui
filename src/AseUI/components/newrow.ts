@@ -1,10 +1,10 @@
 import { ComponentFormart } from './interface';
 
 type NewrowAttributes = {
-  always: boolean;
+  always?: boolean;
 };
 
-export const Newrow = ({ always }: NewrowAttributes): ComponentFormart => {
+export const Newrow = ({ always = false }: NewrowAttributes = {}): ComponentFormart => {
   return {
     tag: 'newrow',
     attributes: {

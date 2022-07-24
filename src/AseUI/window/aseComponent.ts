@@ -16,6 +16,16 @@ export class AseComponent {
     this.window.render();
   }
 
+  rebuild() {
+    this.window.destroy();
+    this.run();
+    this.window.render();
+  }
+
+  update() {
+    this.rebuild();
+  }
+
   initialState() {
     console.error('initialState is not implemented');
     throw new Error('initialState is not implemented');
