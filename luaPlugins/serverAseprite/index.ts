@@ -10,6 +10,39 @@ const NOGUI = JSON.parse(process?.env?.NOGUI ?? 'false') as boolean;
 class Plugin implements tstl.Plugin {
   private prevProcess?: ChildProcessWithoutNullStreams;
   public beforeTransform(program: ts.Program, options: tstl.CompilerOptions, emitHost: tstl.EmitHost) {
+    /*     console.log(program); */
+    /*       
+    program.emit(
+      undefined,
+      (fileName: string, text: string, writeByteOrderMark: boolean) => {
+        if (text.includes('@modules') && !fileName.includes('luaPlugins/serverAseprite')) {
+          console.log(fileName);
+          console.log(text);
+          console.log(writeByteOrderMark);
+        }
+      },
+      undefined,
+      undefined
+      {
+        before:   [
+          (context: TransformationContext):ts.CustomTransformer => {
+            console.log(context)
+            return {
+              transformSourceFile(node: ts.SourceFile): ts.SourceFile => {
+
+              },
+              transformBundle(node: ts.isBundle): Bundle => {
+
+              },
+            } as ts.CustomTransformer;
+
+          },
+        ] as as CustomTransformerFactory[],
+      } 
+    );
+  */
+    /*     console.log(program); */
+
     setTimeout(() => {
       const { luaBundle } = options;
       const processName = 'aseprite';

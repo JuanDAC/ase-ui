@@ -135,6 +135,10 @@ build/Release
 node_modules/
 node_modules/*
 jspm_packages/
+src/modules/
+src/modules/*
+lua-plugins/
+lua-plugins/*
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -258,3 +262,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/lua,node,windows,linux,macos
+
+./src/modules/
+./src/modules/*
+./src/modules/**/*

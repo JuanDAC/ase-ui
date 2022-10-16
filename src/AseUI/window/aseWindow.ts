@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { deepCopy } from '../../services/share/deppCopy';
+import { deepCopy } from 'src/modules/juandac/ase-deep-copy/src/main';
 import { AppAttributes } from '../components/app';
 import { OnEvent } from '../components/interface';
 import { AseDialog } from '../interface';

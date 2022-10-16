@@ -1,8 +1,9 @@
+/*
 import { App, Button, Check, Entry, Newrow, Separator } from './AseUI/components';
 import { ComponentFormart, OnEvent } from './AseUI/components/interface';
 import { AseComponent } from './AseUI/window/aseComponent';
 
-/* class Main extends AseComponent {
+class Main extends AseComponent {
   constructor() {
     super();
   }
@@ -62,7 +63,7 @@ import { AseComponent } from './AseUI/window/aseComponent';
   }
 } */
 
-class TasksMetadata {
+/* class TasksMetadata {
   done: boolean;
   index: number;
   static count = 0;
@@ -182,3 +183,4 @@ class Main extends AseComponent {
 }
 
 new Main();
+ */
