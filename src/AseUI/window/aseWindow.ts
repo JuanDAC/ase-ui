@@ -1,4 +1,4 @@
-import { deepCopy } from 'src/modules/juandac/ase-deep-copy/src/main';
+import { deepCopy } from 'juandac/ase-deep-copy/src/main';
 import { AppAttributes } from '../components/app';
 import { OnEvent } from '../components/interface';
 import { AseDialog } from '../interface';

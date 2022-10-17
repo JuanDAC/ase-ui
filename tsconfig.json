@@ -6,7 +6,7 @@
     "strict": true,
     "types": ["dota-lua-types", "@types/node", "types-aseprite"],
     "resolveJsonModule": true,
-    "baseUrl": "./",
+    "baseUrl": "./src/modules",
     "plugins": [{ "transform": "dota-lua-types/transformer" }]
   },
   "tstl": {
