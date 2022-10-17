@@ -10,15 +10,15 @@ const NOGUI = JSON.parse(process?.env?.NOGUI ?? 'false') as boolean;
 class Plugin implements tstl.Plugin {
   private prevProcess?: ChildProcessWithoutNullStreams;
   public beforeTransform(program: ts.Program, options: tstl.CompilerOptions, emitHost: tstl.EmitHost) {
-    /*     console.log(program); */
+    /*     print(program); */
     /*       
     program.emit(
       undefined,
       (fileName: string, text: string, writeByteOrderMark: boolean) => {
         if (text.includes('@modules') && !fileName.includes('luaPlugins/serverAseprite')) {
-          console.log(fileName);
-          console.log(text);
-          console.log(writeByteOrderMark);
+          print(fileName);
+          print(text);
+          print(writeByteOrderMark);
         }
       },
       undefined,
@@ -26,7 +26,7 @@ class Plugin implements tstl.Plugin {
       {
         before:   [
           (context: TransformationContext):ts.CustomTransformer => {
-            console.log(context)
+            print(context)
             return {
               transformSourceFile(node: ts.SourceFile): ts.SourceFile => {
 
@@ -41,7 +41,7 @@ class Plugin implements tstl.Plugin {
       } 
     );
   */
-    /*     console.log(program); */
+    /*     print(program); */
 
     setTimeout(() => {
       const { luaBundle } = options;
@@ -53,21 +53,21 @@ class Plugin implements tstl.Plugin {
       const aseprite = spawn(processName, args);
       this.prevProcess = aseprite;
 
-      console.log('-'.repeat(80));
+      print('-'.repeat(80));
       const title = ` ${processName.toUpperCase()} with procees ID: ${aseprite.pid}`;
-      console.log('|', title, ' '.repeat(75 - title.length), '|');
-      console.log('-'.repeat(80));
+      print('|', title, ' '.repeat(75 - title.length), '|');
+      print('-'.repeat(80));
 
       aseprite.stdout.on('data', (data) => {
-        console.log(data.toString());
+        print(data.toString());
       });
 
       aseprite.stderr.on('data', (data) => {
-        console.error(data.toString());
+        print(data.toString());
       });
 
       aseprite.on('exit', (code) => {
-        console.log(`Child exited with code ${code}`);
+        print(`Child exited with code ${code}`);
       });
     }, 3000);
   }

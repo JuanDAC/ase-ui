@@ -30,28 +30,28 @@ export class AseTap implements AseDialog, AseTapMaximize, AseTapObserver {
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   destroy(): void {
-    console.log('Method not implemented.');
+    print('Method not implemented.');
   }
   show(): void {
-    console.log('Method not implemented.');
+    print('Method not implemented.');
   }
   init(): void {
-    console.log('Method not implemented.');
+    print('Method not implemented.');
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(state: object): void {
-    console.log('Method not implemented.');
+    print('Method not implemented.');
   }
   get id(): number {
     return this._id;
   }
   onMaximize(): void {
-    console.log('Method not implemented.');
+    print('Method not implemented.');
   }
   hide(): void {
-    console.log('Method not implemented.');
+    print('Method not implemented.');
   }
   render(): void {
-    console.log('Method not implemented.');
+    print('Method not implemented.');
   }
 }

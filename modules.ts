@@ -17,13 +17,13 @@ const emitResult = tstl.transpileFiles(parsedCommandLine.fileNames, parsedComman
     const index = messageText.indexOf('in file');
     const relativePath = messageText.substring(index + 8);
     const pathFileName = path.resolve(__dirname, relativePath);
-    console.log(pathFileName);
-    console.log(messageText);
-    console.log(messageText);
-    console.log(messageText);
-    console.log(messageText);
-    console.log(messageText);
-    console.log(messageText);
+    print(pathFileName);
+    print(messageText);
+    print(messageText);
+    print(messageText);
+    print(messageText);
+    print(messageText);
+    print(messageText);
   }
 }); 
 

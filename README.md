@@ -35,7 +35,7 @@ class Main extends AseComponent {
           option: 'es-ES',
           options: ['es-ES', 'en-US'],
           onchange: () => {
-            /*             console.log('change', JSON.stringify(this.window.state)); */
+            /*             print('change', JSON.stringify(this.window.state)); */
           },
         }),
         Button({

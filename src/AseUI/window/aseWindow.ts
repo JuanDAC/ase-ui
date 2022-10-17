@@ -131,7 +131,7 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
     if (Object.keys(this.state).includes(id)) {
       this.ui.modify({ id, [key]: value });
     } else {
-      console.error(`${id} not found`);
+      print(`${id} not found`);
     }
   }
 }

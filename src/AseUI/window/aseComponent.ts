@@ -27,12 +27,12 @@ export class AseComponent {
   }
 
   initialState() {
-    console.error('initialState is not implemented');
+    print('initialState is not implemented');
     throw new Error('initialState is not implemented');
   }
 
   run() {
-    console.error('run is not implemented');
+    print('run is not implemented');
     throw new Error('run is not implemented');
   }
 }
