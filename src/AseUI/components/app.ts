@@ -3,7 +3,7 @@ import { ComponentFormart, OnEvent} from './interface';
 export type AppAttributes = {
   children: ComponentFormart[];
   title?: string;
-  onclose?: OnEvent;
+  onclose?: OnEvent<boolean | void>;
   position?: Position;
 };
 

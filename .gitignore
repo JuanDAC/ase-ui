@@ -266,3 +266,7 @@ $RECYCLE.BIN/
 ./src/modules/
 ./src/modules/*
 ./src/modules/**/*
+
+src/modules/
+src/modules/*
+src/modules/**/*

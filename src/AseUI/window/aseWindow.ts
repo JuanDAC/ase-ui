@@ -13,14 +13,17 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   private _active: boolean = false;
   private _position: Rectangle | null = null;
+
   constructor(aseTapManager: AseTapManager) {
     this._aseTapManager = aseTapManager;
     this._id = Math.random();
     this.init();
   }
+
   set template(components: AppAttributes) {
     this._template = components;
   }
+
   get ui(): Dialog {
     if (this._ui == null) this.createUI();
     return this._ui;
@@ -33,6 +36,7 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   get state(): Dialog['data'] {
     return this.ui.data;
   }
+
   get ok(): Dialog['data']['ok'] {
     return !!this.ui.data.ok;
   }
@@ -41,27 +45,34 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
     const { title, onclose, position } = this.components;
     return {
       title,
-      onclose,
+      onclose: () => {
+        if (typeof onclose === 'function') onclose() && this.destroy();
+        if (typeof onclose !== 'function') this.destroy();
+      },
       position,
     };
   }
   get components(): AppAttributes {
     return deepCopy(this._template);
   }
+
   createUI(): void {
     this._ui = new Dialog(this.dialogOptions);
   }
+
   bindEvents(key: string, value: unknown, attributes: { [key: string]: any }): void {
     if (attributes && typeof value === 'function' && key.startsWith('on')) {
       const onEvent: OnEvent = value as OnEvent;
       attributes[key as keyof typeof attributes] = onEvent(this);
     }
   }
+
   parseComponents(attributes: object): (this: any, entry: [string, unknown]) => void {
     return ([key, value]) => {
       this.bindEvents(key, value, attributes);
     };
   }
+
   mountComponents(): void {
     const { children } = this.components;
     children.map((component) => {
@@ -74,30 +85,41 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
       }
     });
   }
+
   init(): void {
     return;
   }
+
   destroy(): void {
     this._position = this._ui.bounds;
     this.ui.close();
     this._active = false;
   }
+
   show(): void {
-    this.ui.show({ wait: false });
+    const { bounds } = this._ui;
+    bounds.x = this._position ? this._position.x : bounds.x;
+    bounds.y = this._position ? this._position.y : bounds.y;
+    const showConfig: ComponentOptions = {
+      wait: false,
+      bounds,
+    };
+    this.ui.show(showConfig);
     this._active = true;
-    if (this._position) {
-      this._ui.bounds = this._position;
-    }
   }
+
   get id(): number {
     return this._id;
   }
+
   onMinimize(): void {
     this._aseTapManager.notyfy(this.dialogOptions.title as string);
   }
+
   hide(): void {
     this.destroy();
   }
+
   render(): void {
     this.createUI();
     this.mountComponents();

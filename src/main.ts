@@ -1,5 +1,4 @@
-/*
-import { App, Button, Check, Entry, Newrow, Separator } from './AseUI/components';
+import { App, Button, Check, Combobox, Entry, Newrow, Separator } from './AseUI/components';
 import { ComponentFormart, OnEvent } from './AseUI/components/interface';
 import { AseComponent } from './AseUI/window/aseComponent';
 
@@ -30,7 +29,7 @@ class Main extends AseComponent {
           option: 'es-ES',
           options: ['es-ES', 'en-US'],
           onchange: () => {
-            console.log('change', JSON.stringify(this.window.state));
+            /*             console.log('change', JSON.stringify(this.window.state)); */
           },
         }),
         Button({
@@ -61,16 +60,19 @@ class Main extends AseComponent {
       ],
     });
   }
-} */
+}
 
-/* class TasksMetadata {
+/*
+class TasksMetadata {
   done: boolean;
   index: number;
   static count = 0;
+
   constructor({ done = false } = {}) {
     this.done = done;
     this.index = ++TasksMetadata.count;
   }
+
   toggle() {
     this.done = !this.done;
     return this;
@@ -83,6 +85,7 @@ type ValuesLocalState = Tasks;
 
 class Main extends AseComponent {
   localstate!: Map<string, ValuesLocalState>;
+
   constructor() {
     super();
   }
@@ -96,7 +99,7 @@ class Main extends AseComponent {
     this.window.template = App({
       title: 'TASK MANAGER',
       onclose: () => {
-        return;
+        return true;
       },
       children: [
         Separator({
@@ -123,13 +126,10 @@ class Main extends AseComponent {
   }
 
   get tasks() {
-    return (
-      Object.entries((this.localstate.get('tasks') ?? {}) as Tasks)
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        .sort(([_, a], [__, b]) => a.index - b.index)
-        .map(this.createTask())
-        .flat()
-    );
+    return Object.entries((this.localstate.get('tasks') ?? {}) as Tasks)
+      .sort(([_, a], [__, b]) => a.index - b.index)
+      .map(this.createTask())
+      .flat();
   }
 
   addTask(): OnEvent {
@@ -141,6 +141,7 @@ class Main extends AseComponent {
       this.update();
     };
   }
+
   removeTask(name: string): OnEvent {
     return () => {
       const previouTasks: object = this.localstate.get('tasks') ?? {};
@@ -149,7 +150,7 @@ class Main extends AseComponent {
       this.update();
     };
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   createTask(): (this: any, value: [string, TasksMetadata], index: number, array: [string, TasksMetadata][]) => ComponentFormart[] {
     return ([name, taskConfig]: [string, TasksMetadata], index: number) => [
       Check({
@@ -181,6 +182,6 @@ class Main extends AseComponent {
     ];
   }
 }
+ */
 
 new Main();
- */

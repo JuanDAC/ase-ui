@@ -1,4 +1,4 @@
-import { AseDialog } from "../interface";
+import { AseDialog } from '../interface';
 
 export class State extends Map<string, any> {
   private window: AseDialog;
