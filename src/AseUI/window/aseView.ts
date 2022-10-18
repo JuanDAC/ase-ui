@@ -1,5 +1,6 @@
-import { ComponentFormart } from '../components';
-import { State, ComponentsState } from '../state';
+import { ComponentFormart } from '../components/interface';
+import { ComponentsState } from '../state/components';
+import { State } from '../state/state';
 import { AseTapManager } from '../tap';
 import { AseComponent } from './aseComponent';
 import { AseWindow } from './aseWindow';

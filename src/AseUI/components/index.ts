@@ -13,24 +13,5 @@ import { Radio } from './radio';
 import { Shades } from './shades';
 import { Slider } from './slider';
 import { Component } from './component';
-import type { ComponentFormart, OnEvent } from './interface';
 
-export {
-  Button,
-  Separator,
-  App,
-  Combobox,
-  Check,
-  Color,
-  Entry,
-  File,
-  Label,
-  Newrow,
-  Number,
-  Radio,
-  Shades,
-  Slider,
-  Component,
-  ComponentFormart,
-  OnEvent,
-};
+export { Button, Separator, App, Combobox, Check, Color, Entry, File, Label, Newrow, Number, Radio, Shades, Slider, Component };
