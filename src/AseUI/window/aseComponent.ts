@@ -1,3 +1,4 @@
+import { ComponentFormart } from '../components/interface';
 import { AseComponentMethodsProps, Component } from './interface';
 
 export class AseComponent implements Component {
@@ -13,7 +14,7 @@ export class AseComponent implements Component {
     throw new Error('initialState is not implemented');
   }
 
-  render(_: AseComponentMethodsProps) {
+  render(_: AseComponentMethodsProps): ComponentFormart[] {
     print('initialState is not implemented');
     throw new Error('initialState is not implemented');
     return [];
