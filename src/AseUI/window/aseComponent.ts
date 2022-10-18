@@ -1,19 +1,4 @@
-import { ComponentFormart } from '../components/interface';
-import { State } from '../state';
-import { AseWindow } from './aseWindow';
-
-export type AseComponentMethodsProps = { state: State; window: AseWindow };
-
-export interface Component {
-  initialState(_: AseComponentMethodsProps): void;
-  componentDidMount?(_: AseComponentMethodsProps): void;
-  componentDidUpdate?(_: AseComponentMethodsProps): void;
-  componentWillUpdate?(_: AseComponentMethodsProps): void;
-  componentWillMount?(_: AseComponentMethodsProps): void;
-  render(_: AseComponentMethodsProps): ComponentFormart[];
-  didMount: boolean;
-  didUpdate: boolean;
-}
+import { AseComponentMethodsProps, Component } from './interface';
 
 export class AseComponent implements Component {
   didMount: boolean;
@@ -23,12 +8,12 @@ export class AseComponent implements Component {
     this.didUpdate = false;
   }
 
-  initialState() {
+  initialState(_: AseComponentMethodsProps) {
     print('initialState is not implemented');
     throw new Error('initialState is not implemented');
   }
 
-  render() {
+  render(_: AseComponentMethodsProps) {
     print('initialState is not implemented');
     throw new Error('initialState is not implemented');
     return [];

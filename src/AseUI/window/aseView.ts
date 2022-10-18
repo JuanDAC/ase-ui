@@ -1,5 +1,4 @@
-import { State } from '../state';
-import { ComponentsState } from '../state/components';
+import { State, ComponentsState } from '../state';
 import { AseTapManager } from '../tap';
 import { AseComponent } from './aseComponent';
 import { AseWindow } from './aseWindow';

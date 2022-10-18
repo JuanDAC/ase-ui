@@ -1,3 +1,5 @@
+import { AseComponent } from './aseComponent';
+import { AseView } from './aseView';
 import { AseWindow } from './aseWindow';
 
-export { AseWindow };
+export { AseWindow, AseComponent, AseView };

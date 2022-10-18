@@ -1,6 +1,6 @@
 import { ComponentFormart } from '../components/interface';
-import { Component } from '../window/aseComponent';
 import { AseView } from '../window/aseView';
+import { Component } from '../window/interface';
 
 export class ComponentsState extends Map<string, Component> {
   private _view: AseView;

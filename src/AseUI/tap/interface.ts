@@ -1,4 +1,4 @@
-import { AseDialog } from '../interface';
+import type { AseDialog } from '../interface';
 
 export interface AseTapMaximize extends AseDialog {
   onMaximize(): void;
