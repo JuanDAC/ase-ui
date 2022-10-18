@@ -12,14 +12,11 @@ export class State extends Map<string, any> {
   }
 
   updateShare(group: string, key: string, update: (this: any, value: any) => any): void {
-    const { value: oldValue, ids, modify } = this.get(`group/${group}/${key}`) as { ids: string[]; value: any, modify: boolean };
+    const { value: oldValue, ids, modify } = this.get(`group/${group}/${key}`) as { ids: string[]; value: any; modify: boolean };
     const value = update(oldValue);
     this.set(`group/${group}/${key}`, { value, ids });
-    ids.forEach((id) => this._view.modify(id, key, value));
-    if (modify)
-      ids.forEach((id) => this._view.modify(id, key, value));
-    if (!modify)
-      this._view.update()
+    if (modify) ids.forEach((id) => this._view.modify(id, key, value));
+    if (!modify) this._view.update();
   }
 
   obtainShare(group: string, key: string): any {
