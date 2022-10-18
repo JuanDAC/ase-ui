@@ -21,23 +21,20 @@ export class AseTapManager {
 
   attach(window: AseWindow): void {
     const { title } = window.dialogOptions;
-    if (!title || title === 'taps') {
-      return;
-    }
-    if (this._register.has(title)) {
-      return;
-    }
+
+    if (!title || title === 'taps') return;
+
+    if (this._register.has(title)) return;
+
     this._register.set(title, window);
   }
   detach(activator: AseWindow): void {
     const { title } = activator.dialogOptions;
-    if (!title || title === 'taps') {
-      return;
-    }
-    if (!this._register.has(title)) {
-      return;
-    }
-    // remove botton from tap minimized
+
+    if (!title || title === 'taps') return;
+
+    if (!this._register.has(title)) return;
+
     this._register.delete(title);
   }
 
