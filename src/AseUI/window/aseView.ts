@@ -1,3 +1,4 @@
+import { ComponentFormart } from '../components';
 import { State, ComponentsState } from '../state';
 import { AseTapManager } from '../tap';
 import { AseComponent } from './aseComponent';
@@ -22,6 +23,10 @@ export class AseView {
     this.run();
     this._components.componentDidMount();
     this.window.render();
+  }
+
+  component(name: string): ComponentFormart[] {
+    return this._components.obtain(name);
   }
 
   components(): { [name: string]: AseComponent } {
