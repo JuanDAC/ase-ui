@@ -4,11 +4,12 @@ type ShadesAttributes = {
   id: string;
   label?: string;
   mode?: 'pick' | 'sort';
+  visible?: boolean;
   colors?: Color[];
   onclick?: OnEvent;
 };
 
-export const Shades = ({ id, label, mode, colors, onclick }: ShadesAttributes): ComponentFormart => {
+export const Shades = ({ id, label, mode, colors, onclick, visible }: ShadesAttributes): ComponentFormart => {
   return {
     tag: 'shades',
     attributes: {
@@ -16,6 +17,7 @@ export const Shades = ({ id, label, mode, colors, onclick }: ShadesAttributes): 
       label,
       mode,
       colors,
+      visible,
       onclick,
     },
   };
