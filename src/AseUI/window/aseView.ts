@@ -14,7 +14,7 @@ export class AseView {
   constructor() {
     this.tapManager = AseTapManager.singleton(new AseWindow());
     this.window = new AseWindow(this.tapManager);
-    this.state = new State(this.window);
+    this.state = new State(this);
     this._components = new ComponentsState(this);
     this.initialState();
     Object.entries(this.components()).forEach(([key, value]) => {
@@ -47,6 +47,10 @@ export class AseView {
 
   update() {
     this.rebuild();
+  }
+
+  modify(id: string, key: string, value: any) {
+    this.window.modify(id, key, value);
   }
 
   initialState() {
