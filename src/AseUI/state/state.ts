@@ -19,8 +19,8 @@ export class State extends Map<string, { value: any; modify: boolean; ids?: stri
     this._view = view;
   }
 
-  initialShare({ group, ids, key, value, modify = true }: InitialShareProps): void {
-    this.set(`group/${group}/${key}`, { value, ids, modify });
+  initialShare({ group, ids, key, initialValue, modify = true }: InitialShareProps): void {
+    this.set(`group/${group}/${key}`, { value: initialValue, ids, modify });
   }
 
   updateShare({ group, key, update }: UpdateShareProps): void {
@@ -50,7 +50,7 @@ export class State extends Map<string, { value: any; modify: boolean; ids?: stri
     return value;
   }
 
-  initial({ id, key, value, modify = true }: InitialProps): void {
-    this.set(`${id}/${key}`, { value, modify });
+  initial({ id, key, initialValue, modify = true }: InitialProps): void {
+    this.set(`${id}/${key}`, { value: initialValue, modify });
   }
 }
