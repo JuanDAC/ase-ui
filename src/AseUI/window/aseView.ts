@@ -50,11 +50,11 @@ export class AseView {
 
   initialState() {
     print('initialState is not implemented');
-    throw new Error('initialState is not implemented');
+    print('initialState is not implemented');
   }
 
   run() {
     print('run is not implemented');
-    throw new Error('run is not implemented');
+    print('run is not implemented');
   }
 }

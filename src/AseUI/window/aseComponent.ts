@@ -11,12 +11,12 @@ export class AseComponent implements Component {
 
   initialState(_: AseComponentMethodsProps) {
     print('initialState is not implemented');
-    throw new Error('initialState is not implemented');
+    print('initialState is not implemented');
   }
 
   render(_: AseComponentMethodsProps): ComponentFormart[] {
     print('initialState is not implemented');
-    throw new Error('initialState is not implemented');
+    print('initialState is not implemented');
     return [];
   }
 }

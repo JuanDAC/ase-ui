@@ -8,25 +8,31 @@ export class AseTap implements AseDialog, AseTapMaximize, AseTapObserver {
     this._id = Math.random();
   }
   modify(id: string, key: string, value: any): void {
-    throw new Error('Method not implemented.');
+    print('Method not implemented.');
   }
   set template(components: AppAttributes) {
-    throw new Error('Method not implemented.');
+    print('Method not implemented.');
   }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   get ui(): Dialog {
-    throw new Error('Method not implemented.');
+    print('Method not implemented.');
   }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   get dialogOptions(): DialogOptions {
-    throw new Error('Method not implemented.');
+    print('Method not implemented.');
   }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   get components(): any {
-    throw new Error('Method not implemented.');
+    print('Method not implemented.');
   }
   createUI(): void {
-    throw new Error('Method not implemented.');
+    print('Method not implemented.');
   }
   mountComponents(): void {
-    throw new Error('Method not implemented.');
+    print('Method not implemented.');
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   destroy(): void {
