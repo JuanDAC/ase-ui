@@ -12,7 +12,7 @@ export class AseView {
   protected _components: ComponentsState;
 
   constructor() {
-    this.tapManager = AseTapManager.singleton();
+    this.tapManager = AseTapManager.singleton(new AseWindow());
     this.window = new AseWindow(this.tapManager);
     this.state = new State(this.window);
     this._components = new ComponentsState(this);

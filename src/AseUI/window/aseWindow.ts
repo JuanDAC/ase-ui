@@ -9,12 +9,12 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   private _id: number;
   private _ui!: Dialog;
   private _template: AppAttributes = { children: [] };
-  private _aseTapManager: AseTapManager;
+  private _aseTapManager?: AseTapManager;
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   private _active: boolean = false;
   private _position: Rectangle | null = null;
 
-  constructor(aseTapManager: AseTapManager) {
+  constructor(aseTapManager?: AseTapManager) {
     this._aseTapManager = aseTapManager;
     this._id = Math.random();
     this.init();
@@ -113,7 +113,7 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   }
 
   onMinimize(): void {
-    this._aseTapManager.notyfy(this.dialogOptions.title as string);
+    this._aseTapManager?.notyfy(this.dialogOptions.title as string);
   }
 
   hide(): void {
@@ -123,7 +123,7 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   render(): void {
     this.createUI();
     this.mountComponents();
-    this._aseTapManager.attach(this);
+    this._aseTapManager?.attach(this);
     this.show();
   }
 

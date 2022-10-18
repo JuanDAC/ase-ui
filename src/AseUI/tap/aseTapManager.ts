@@ -1,5 +1,5 @@
 import { App, Button } from '../components';
-import { AseWindow } from '../window';
+import type { AseWindow } from '../window';
 
 export class AseTapManager {
   private _register: Map<string, AseWindow> = new Map();
@@ -7,13 +7,13 @@ export class AseTapManager {
   private window!: AseWindow;
   private taps: Set<string> = new Set();
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private constructor() {
-    this.window = new AseWindow(this);
+  private constructor(window: AseWindow) {
+    this.window = window;
   }
 
-  static singleton(): AseTapManager {
+  static singleton(window: AseWindow): AseTapManager {
     if (AseTapManager._instance == null) {
-      AseTapManager._instance = new AseTapManager();
+      AseTapManager._instance = new AseTapManager(window);
     }
 
     return AseTapManager._instance as AseTapManager;
