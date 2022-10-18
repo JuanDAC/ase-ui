@@ -1,12 +1,12 @@
 import type { AseView } from '../window';
 
-type InitialShareProps = { group: string; ids: string[]; key: string; value: any; modify: boolean };
+type InitialShareProps = { group: string; ids: string[]; key: string; initialValue: any; modify?: boolean };
 
 type UpdateShareProps = { group: string; key: string; update: (this: any, value: any) => any };
 
 type ObtainShareProps = { group: string; key: string };
 
-type InitialProps = { id: string; key: string; value: any; modify: boolean };
+type InitialProps = { id: string; key: string; initialValue: any; modify?: boolean };
 
 type UpdateProps = { id: string; key: string; update: (this: any, value: any) => any };
 
