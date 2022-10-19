@@ -63,7 +63,7 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   bindEvents(key: string, value: unknown, attributes: { [key: string]: any }): void {
     if (attributes && typeof value === 'function' && key.startsWith('on')) {
       const onEvent: OnEvent = value as OnEvent;
-      attributes[key as keyof typeof attributes] = onEvent(this);
+      attributes[key as keyof typeof attributes] = () => onEvent(this.state[attributes.id]);
     }
   }
 
@@ -80,7 +80,8 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
       const nameMethod: keyof Dialog = tag as keyof Dialog;
       if (tag && typeof this.ui[nameMethod] === 'function') {
         const method = this.ui[nameMethod] as (this: Dialog, config: object) => Dialog;
-        /* Object.entries(component.attributes ?? {}).forEach(this.parseComponents(component.attributes ?? {})); */
+        component.attributes ??= {};
+        Object.entries(component.attributes).forEach(this.parseComponents(component.attributes));
         method.call(this.ui, { ...component.attributes });
       }
     });
