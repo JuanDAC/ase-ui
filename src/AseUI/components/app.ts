@@ -1,4 +1,4 @@
-import { ComponentFormart, OnEvent} from './interface';
+import { ComponentFormart, OnEvent } from './interface';
 
 export type AppAttributes = {
   children: ComponentFormart[];
@@ -7,9 +7,16 @@ export type AppAttributes = {
   position?: Position;
 };
 
-export const App = ({ children, title, onclose, position }: AppAttributes): AppAttributes => {
+export type AppProps = {
+  children: ComponentFormart[] | (ComponentFormart[] | ComponentFormart)[];
+  title?: string;
+  onclose?: OnEvent<boolean | void>;
+  position?: Position;
+};
+
+export const App = ({ children, title, onclose, position }: AppProps): AppAttributes => {
   return {
-    children,
+    children: children.flat() as ComponentFormart[],
     title,
     onclose,
     position,
