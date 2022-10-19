@@ -13,5 +13,9 @@ import { Radio } from './radio';
 import { Shades } from './shades';
 import { Slider } from './slider';
 import { Component } from './component';
+import { ComponentFormart } from './interface';
+import { State } from '../state';
+
+export type FC<T extends { id: string }> = (_: T & { state?: State }) => ComponentFormart[];
 
 export { Button, Separator, App, Combobox, Check, Color, Entry, File, Label, Newrow, Number, Radio, Shades, Slider, Component };
