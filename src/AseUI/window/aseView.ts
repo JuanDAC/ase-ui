@@ -1,3 +1,4 @@
+import type { AppAttributes } from '../components/app';
 import { ComponentFormart } from '../components/interface';
 import { ComponentsState } from '../state/components';
 import { State } from '../state/state';
@@ -21,7 +22,7 @@ export class AseView {
       this._components.add(key, value);
     });
     this._components.initialize();
-    this.run();
+    this.window.template = this.render();
     this._components.componentDidMount();
     this.window.render();
   }
@@ -40,7 +41,7 @@ export class AseView {
 
   rebuild() {
     this.window.destroy();
-    this.run();
+    this.window.template = this.render();
     this._components.componentDidUpdate();
     this.window.render();
   }
@@ -55,11 +56,10 @@ export class AseView {
 
   initialState() {
     print('initialState is not implemented');
-    print('initialState is not implemented');
   }
 
-  run() {
+  render(): AppAttributes {
     print('run is not implemented');
-    print('run is not implemented');
+    return { children: [] };
   }
 }
