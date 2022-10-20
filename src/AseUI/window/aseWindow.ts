@@ -63,7 +63,7 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   bindEvents(key: string, value: unknown, attributes: { [key: string]: any }): void {
     if (attributes && typeof value === 'function' && key.startsWith('on')) {
       const onEvent: OnEvent = value as OnEvent;
-      attributes[key as keyof typeof attributes] = () => onEvent(this.state[attributes.id]);
+      attributes[key as keyof typeof attributes] = (event: object = {}) => onEvent({ ...event, value: this.state[attributes.id] });
     }
   }
 
