@@ -12,7 +12,7 @@ import { Number } from './number';
 import { Radio } from './radio';
 import { Shades } from './shades';
 import { Slider } from './slider';
-import { Component } from './component';
+import { Component, Div, Column, Row } from './component';
 import type { ComponentFormart } from './interface';
 import type { State } from '../state';
 import type { AseWindow } from '../window';
@@ -40,4 +40,7 @@ export {
   Window,
   Checkbox,
   Input,
+  Div,
+  Column,
+  Row,
 };
