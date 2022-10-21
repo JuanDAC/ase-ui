@@ -1,6 +1,6 @@
 import { ComponentFormart } from '../components/interface';
 import { AseView } from '../window/aseView';
-import { Component } from '../window/interface';
+import { AseComponentMethodsProps, Component } from '../window/interface';
 
 export class ComponentsState extends Map<string, Component> {
   private _view: AseView;
@@ -69,6 +69,32 @@ export class ComponentsState extends Map<string, Component> {
     }
 
     return aseComponent.render(this._view.renderOptions);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  obtainRender<T = { [key: string]: any }>(id: string): (_: T) => ComponentFormart[] {
+    const aseComponent = this.get(id);
+
+    if (!aseComponent) return () => [];
+
+    if (
+      !aseComponent.didMount && //
+      typeof aseComponent.componentWillMount === 'function' //
+    )
+      aseComponent.componentWillMount(this._view.renderOptions);
+
+    if (
+      aseComponent.didMount && //
+      !aseComponent.didUpdate && //
+      typeof aseComponent.componentWillUpdate === 'function' //
+    )
+      aseComponent.componentWillUpdate(this._view.renderOptions);
+
+    if (aseComponent.didMount) aseComponent.didUpdate = true;
+
+    if (!aseComponent.didMount) aseComponent.didMount = true;
+
+    return (config: T) => aseComponent.render<AseComponentMethodsProps & T>({ ...config, ...this._view.renderOptions });
   }
 
   add(id: string, value: Component): void {

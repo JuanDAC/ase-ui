@@ -24,3 +24,5 @@ export const Combobox = ({ id, option, options, focus, visible, label, onchange 
     },
   };
 };
+
+export const Select = Combobox;

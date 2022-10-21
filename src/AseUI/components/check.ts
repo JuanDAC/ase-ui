@@ -22,3 +22,5 @@ export const Check = ({ id, text, selected, visible, label, onclick }: CheckAttr
     },
   };
 };
+
+export const Checkbox = Check;

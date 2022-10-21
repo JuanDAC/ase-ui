@@ -22,3 +22,6 @@ export const App = ({ children, title, onclose, position }: AppProps): AppAttrib
     position,
   };
 };
+
+export const Window = App;
+export const Main = App;

@@ -22,3 +22,5 @@ export const Entry = ({ id, label, text, focus, visible, onchange }: entryAttrib
     },
   };
 };
+
+export const Input = Entry;

@@ -18,3 +18,5 @@ export const Label = ({ id, label, text, visible }: LabelAttributes): ComponentF
     },
   };
 };
+
+export const Text = Label;

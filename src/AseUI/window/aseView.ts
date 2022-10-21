@@ -31,6 +31,11 @@ export class AseView {
     return this._components.obtain(name);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  functionalComponent<T = { [key: string]: any }>(name: string): (_: T) => ComponentFormart[] {
+    return this._components.obtainRender<T>(name);
+  }
+
   components(): { [name: string]: AseComponent } {
     return {};
   }
