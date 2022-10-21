@@ -50,7 +50,7 @@ export class AseView {
     this.rebuild();
   }
 
-  modify(id: string, key: string, value: any) {
+  modify(id: string, key: string, value: unknown) {
     this.window.modify(id, key, value);
   }
 

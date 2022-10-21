@@ -9,11 +9,13 @@ export class AseComponent implements Component {
     this.didUpdate = false;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   initialState(_: AseComponentMethodsProps) {
     print('initialState is not implemented');
     print('initialState is not implemented');
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   render(_: AseComponentMethodsProps): ComponentFormart[] {
     print('initialState is not implemented');
     print('initialState is not implemented');
