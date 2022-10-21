@@ -10,7 +10,7 @@ export interface Component {
   componentDidUpdate?(_: AseComponentMethodsProps): void;
   componentWillUpdate?(_: AseComponentMethodsProps): void;
   componentWillMount?(_: AseComponentMethodsProps): void;
-  render<T>(_: AseComponentMethodsProps & T): ComponentFormart[];
+  render(_: AseComponentMethodsProps): ComponentFormart[];
   didMount: boolean;
   didUpdate: boolean;
 }

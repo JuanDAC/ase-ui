@@ -1,6 +1,6 @@
 import { ComponentFormart } from '../components/interface';
 import { AseView } from '../window/aseView';
-import { AseComponentMethodsProps, Component } from '../window/interface';
+import { Component } from '../window/interface';
 
 export class ComponentsState extends Map<string, Component> {
   private _view: AseView;
@@ -94,7 +94,7 @@ export class ComponentsState extends Map<string, Component> {
 
     if (!aseComponent.didMount) aseComponent.didMount = true;
 
-    return (config: T) => aseComponent.render<AseComponentMethodsProps & T>({ ...config, ...this._view.renderOptions });
+    return (config: T) => aseComponent.render({ ...config, ...this._view.renderOptions });
   }
 
   add(id: string, value: Component): void {

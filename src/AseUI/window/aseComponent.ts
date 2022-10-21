@@ -16,7 +16,7 @@ export class AseComponent implements Component {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-  render<T = any>(_: AseComponentMethodsProps & T): ComponentFormart[] {
+  render(_: AseComponentMethodsProps): ComponentFormart[] {
     print('initialState is not implemented');
     print('initialState is not implemented');
     return [];
