@@ -10,8 +10,7 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   private _ui!: Dialog;
   private _template: AppAttributes = { children: [] };
   private _aseTapManager?: AseTapManager;
-  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
-  private _active: boolean = false;
+  private _active = false;
   private _position: Rectangle | null = null;
 
   constructor(aseTapManager?: AseTapManager) {
