@@ -42,8 +42,8 @@ export class AseTapManager {
     return;
   }
 
-  run() {
-    this.window.template = App({
+  render() {
+    return App({
       title: 'Taps',
       children: [...this.taps].map((title) =>
         Button({
@@ -58,16 +58,15 @@ export class AseTapManager {
   maximize(title: string): void {
     this.window.hide();
     this.taps.delete(title);
-    const window = this._register.get(title) as AseWindow;
-    window.render();
-    this.run();
+    this._register.get(title)?.render();
+    this.window.template = this.render();
     this.window.render();
   }
 
   notyfy(title: string): void {
     if (this.window.active) this.window.hide();
     this.taps.add(title);
-    this.run();
+    this.window.template = this.render();
     this.window.render();
   }
 }

@@ -7,10 +7,11 @@ export interface ComponentFormart {
   attributes?: { [key: string]: unknown };
 }
 
-export type AseUIEvent<T = any> = {
+export type AseUIEvent<T = unknown> = {
   value: T;
-  button?: any;
-  color?: any;
+  close: () => void;
+  button?: MouseButton;
+  color?: Color;
 };
 
-export type OnEvent<T = void, H = any> = (this: any, event?: AseUIEvent<H>) => T;
+export type OnEvent<T = void, H = unknown> = (this: any, event?: AseUIEvent<H>) => T;

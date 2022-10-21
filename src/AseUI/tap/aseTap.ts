@@ -7,7 +7,8 @@ export class AseTap implements AseDialog, AseTapMaximize, AseTapObserver {
   constructor() {
     this._id = Math.random();
   }
-  modify(id: string, key: string, value: any): void {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  modify(id: string, key: string, value: unknown): void {
     print('Method not implemented.');
   }
   set template(components: AppAttributes) {
