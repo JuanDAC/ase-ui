@@ -132,7 +132,7 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
     this.show();
   }
 
-  modify(id: string, key: string, value: any): void {
+  modify(id: string, key: string, value: unknown): void {
     if (Object.keys(this.state).includes(id)) {
       this.ui.modify({ id, [key]: value });
     } else {
