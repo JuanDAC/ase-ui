@@ -81,7 +81,7 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
     const { children } = this.components;
     children.map((component) => {
       const { tag } = component;
-      const nameMethod: keyof Dialog = tag as keyof Dialog;
+      const nameMethod = tag as keyof Dialog;
       if (tag && typeof this.ui[nameMethod] === 'function') {
         const method = this.ui[nameMethod] as (this: Dialog, config: object) => Dialog;
         component.attributes ??= {};
@@ -133,10 +133,8 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   }
 
   modify(id: string, key: string, value: unknown): void {
-    if (Object.keys(this.state).includes(id)) {
-      this.ui.modify({ id, [key]: value });
-    } else {
-      print(`${id} not found`);
-    }
+    if (Object.keys(this.state).includes(id)) this.ui.modify({ id, [key]: value });
+
+    if (!Object.keys(this.state).includes(id)) print(`${id} not found`);
   }
 }
