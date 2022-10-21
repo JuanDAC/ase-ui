@@ -7,7 +7,7 @@ type ComboboxAttributes = {
   option?: string;
   options?: string[];
   label?: string;
-  onchange?: OnEvent;
+  onchange?: OnEvent<void, string>;
 };
 
 export const Combobox = ({ id, option, options, focus, visible, label, onchange }: ComboboxAttributes): ComponentFormart => {

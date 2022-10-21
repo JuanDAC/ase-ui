@@ -6,7 +6,7 @@ type CheckAttributes = {
   visible?: boolean;
   label?: string;
   selected?: boolean;
-  onclick?: OnEvent;
+  onclick?: OnEvent<void, boolean>;
 };
 
 export const Check = ({ id, text, selected, visible, label, onclick }: CheckAttributes): ComponentFormart => {

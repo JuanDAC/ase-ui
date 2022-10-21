@@ -5,7 +5,7 @@ type ColorAttributes = {
   label?: string;
   color?: Color;
   visible?: boolean;
-  onchange?: OnEvent;
+  onchange?: OnEvent<void, Color>;
 };
 
 export const Color = ({ id, label, color, visible, onchange }: ColorAttributes): ComponentFormart => {

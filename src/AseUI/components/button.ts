@@ -7,7 +7,7 @@ type ButtonAttributes = {
   visible?: boolean;
   label?: string;
   selected?: boolean;
-  onclick?: OnEvent;
+  onclick?: OnEvent<void, boolean>;
 };
 
 export const Button = ({ id, text, selected, focus, visible, label, onclick }: ButtonAttributes): ComponentFormart => {
