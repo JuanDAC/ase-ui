@@ -14,4 +14,5 @@ export type AseUIEvent<T = unknown> = {
   color?: Color;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type OnEvent<T = void, H = unknown> = (this: any, event?: AseUIEvent<H>) => T;

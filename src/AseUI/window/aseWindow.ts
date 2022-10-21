@@ -60,16 +60,18 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
     this._ui = new Dialog(this.dialogOptions);
   }
 
-  bindEvents(name: string, eventHandler: unknown, attributes: { [key: string]: any }): void {
+  bindEvents(name: string, eventHandler: unknown, attributes: { [key: string]: unknown }): void {
     if (attributes && typeof eventHandler === 'function' && name.startsWith('on')) {
-      const value = this.state[attributes.id];
+      const id = attributes.id as keyof typeof this.state;
+      const value = this.state[id];
       const close = () => this._ui.close();
       const onEvent = eventHandler as OnEvent<unknown, typeof value>;
       attributes[name as keyof typeof attributes] = (event: object = {}) => onEvent({ ...event, close, value });
     }
   }
 
-  parseComponents(attributes: object): (this: any, entry: [string, unknown]) => void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  parseComponents(attributes: { [key: string]: unknown }): (this: any, entry: [string, unknown]) => void {
     return ([key, value]) => {
       this.bindEvents(key, value, attributes);
     };

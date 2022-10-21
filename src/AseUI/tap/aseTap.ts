@@ -26,7 +26,7 @@ export class AseTap implements AseDialog, AseTapMaximize, AseTapObserver {
   }
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  get components(): any {
+  get components(): AppAttributes {
     print('Method not implemented.');
   }
   createUI(): void {
