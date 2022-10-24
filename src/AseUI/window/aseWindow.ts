@@ -60,7 +60,7 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
   }
 
   bindEvents(name: string, eventHandler: unknown, attributes: { [key: string]: unknown }): void {
-    if (attributes && typeof eventHandler === 'function' && name.startsWith('on')) {
+    if (attributes && typeof eventHandler === 'function' && name.startsWith('on') && name !== 'onclose') {
       const id = attributes.id as keyof typeof this.state;
       const value = this.state[id];
       const close = () => this.destroy();
