@@ -44,12 +44,7 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
     const { title, onclose, position } = this.components;
     return {
       title,
-      onclose: () => {
-        if (typeof onclose === 'function') {
-          if (onclose()) this.destroy();
-        }
-        if (typeof onclose !== 'function') this.destroy();
-      },
+      onclose,
       position,
     };
   }
