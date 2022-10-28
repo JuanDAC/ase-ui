@@ -5,6 +5,7 @@ import { State } from '../state/state';
 import { AseTapManager } from '../tap';
 import { AseComponent } from './aseComponent';
 import { AseWindow } from './aseWindow';
+import { AseComponentMethodsProps } from './interface';
 
 export class AseView {
   protected window: AseWindow;
@@ -40,8 +41,8 @@ export class AseView {
     return {};
   }
 
-  get renderOptions(): { state: State; window: AseWindow } {
-    return { state: this.state, window: this.window };
+  get renderOptions(): AseComponentMethodsProps {
+    return { state: this.state, window: this.window, view: this };
   }
 
   rebuild() {
