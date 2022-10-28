@@ -77,14 +77,29 @@ export class AseWindow implements AseDialog, AseTapMinimaze {
 
   mountComponents(): void {
     const { children } = this.components;
-    children.map((component) => {
+    children.forEach((component) => {
       const { tag } = component;
       const nameMethod = tag as keyof Dialog;
       if (tag && typeof this.ui[nameMethod] === 'function') {
         const method = this.ui[nameMethod] as (this: Dialog, config: object) => Dialog;
         component.attributes ??= {};
         Object.entries(component.attributes).forEach(this.parseComponents(component.attributes));
-        method.call(this.ui, { ...component.attributes });
+        if (tag === 'shades') {
+          const onclick: OnEvent = (ev) => {
+            if (ev?.button === MouseButton.LEFT) {
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              app.fgColor = ev.color;
+            } else if (ev?.button == MouseButton.RIGHT) {
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              app.bgColor = ev.color;
+            }
+          };
+          return method.call(this.ui, { onclick, ...component.attributes });
+        }
+
+        return method.call(this.ui, { ...component.attributes });
       }
     });
   }

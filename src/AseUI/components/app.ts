@@ -16,7 +16,7 @@ export type AppProps = {
 
 export const App = ({ children, title, onclose, position }: AppProps): AppAttributes => {
   return {
-    children: children.flat() as ComponentFormart[],
+    children: children.flat(20) as ComponentFormart[],
     title,
     onclose,
     position,
