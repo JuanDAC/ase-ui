@@ -1,4 +1,4 @@
-import type { AseView } from '../window';
+import type { AseView } from '../../../window';
 
 type ValueState = string | boolean | number | unknown;
 

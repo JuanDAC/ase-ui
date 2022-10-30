@@ -1,6 +1,6 @@
-import type { AseView } from '.';
+import type { AseView } from '../../../window';
 import type { ComponentFormart } from '../components/interface';
-import type { State } from '../state';
+import type { State } from '../../../state';
 import type { AseWindow } from './aseWindow';
 
 export type AseComponentMethodsProps = { state: State; window: AseWindow; view: AseView };

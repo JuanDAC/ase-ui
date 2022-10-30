@@ -4,45 +4,10 @@ import { ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import { resolve } from 'node:path';
 import 'dotenv/config';
 
-// TODO: Export the plugin as a single repository (not a module) because we need to use with the aseprite package manager like plugin.
-
 const NOGUI = JSON.parse(process?.env?.NOGUI ?? 'false') as boolean;
 class Plugin implements tstl.Plugin {
   private prevProcess?: ChildProcessWithoutNullStreams;
-  public beforeTransform(program: ts.Program, options: tstl.CompilerOptions, emitHost: tstl.EmitHost) {
-    /*     print(program); */
-    /*       
-    program.emit(
-      undefined,
-      (fileName: string, text: string, writeByteOrderMark: boolean) => {
-        if (text.includes('@modules') && !fileName.includes('luaPlugins/serverAseprite')) {
-          print(fileName);
-          print(text);
-          print(writeByteOrderMark);
-        }
-      },
-      undefined,
-      undefined
-      {
-        before:   [
-          (context: TransformationContext):ts.CustomTransformer => {
-            print(context)
-            return {
-              transformSourceFile(node: ts.SourceFile): ts.SourceFile => {
-
-              },
-              transformBundle(node: ts.isBundle): Bundle => {
-
-              },
-            } as ts.CustomTransformer;
-
-          },
-        ] as as CustomTransformerFactory[],
-      } 
-    );
-  */
-    /*     print(program); */
-
+  public beforeTransform(program: ts.Program, options: tstl.CompilerOptions /*, emitHost: tstl.EmitHost */) {
     setTimeout(() => {
       const { luaBundle } = options;
       const processName = 'aseprite';

@@ -1,5 +1,5 @@
 import { App, Button } from '../components';
-import type { AseWindow } from '../window';
+import type { AseWindow } from '../../../window';
 
 export class AseTapManager {
   private _register: Map<string, AseWindow> = new Map();
