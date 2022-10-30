@@ -13,11 +13,7 @@ import { Radio } from '../src/AseUI/components/radio';
 import { Shades } from '../src/AseUI/components/shades';
 import { Slider } from '../src/AseUI/components/slider';
 import { Component, Div, Column, Row } from '../src/AseUI/components/component';
-import type { ComponentFormart } from '../src/AseUI/components/interface';
-import type { State } from '../state';
-import type { AseWindow } from '../window';
-
-export type FC<T extends { id: string }> = (_: T & { state?: State; window?: AseWindow }) => ComponentFormart[];
+import type { ComponentFormart, AseUIEvent, OnEvent, FC } from '../src/AseUI/components/interface';
 
 export {
   Button,
@@ -43,4 +39,8 @@ export {
   Div,
   Column,
   Row,
+  ComponentFormart,
+  AseUIEvent,
+  OnEvent,
+  FC,
 };
