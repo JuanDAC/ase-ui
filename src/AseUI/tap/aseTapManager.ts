@@ -1,4 +1,5 @@
-import { App, Button } from '../components';
+import { App } from '../components/app';
+import { Button } from '../components/button';
 import type { AseWindow } from '../../../window';
 
 export class AseTapManager {
