@@ -1,4 +1,3 @@
-
 # 🎨 ase_ui - UI Library for Aseprite Plugins 🌟
 
 Welcome to `ase_ui`, a comprehensive UI library designed specifically for creating beautiful and functional interfaces for Aseprite scripts. This library leverages the power of TypeScript and Lua, enabling developers to create interfaces with ease, much like using Flutter!
