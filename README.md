@@ -1,10 +1,46 @@
-# ase_ui
 
-Use this library to create UI for aseprite scripts in when you use typescripttolua to easily generate beautiful components like this Flutter!
+# 🎨 ase_ui - UI Library for Aseprite Plugins 🌟
 
-## Tap Managers
+Welcome to `ase_ui`, a comprehensive UI library designed specifically for creating beautiful and functional interfaces for Aseprite scripts. This library leverages the power of TypeScript and Lua, enabling developers to create interfaces with ease, much like using Flutter!
 
-```ts
+## 📦 Installation
+
+To install the `ase_ui` library, use the following command with `asepm`:
+
+```bash
+asepm install dependency juandac/ase-ui
+```
+
+## 🚀 Features
+
+- **Easy to use**: Create complex UIs with minimal code.
+- **TypeScript support**: Write your Aseprite plugins in TypeScript and convert them to Lua.
+- **Component-based architecture**: Modular and reusable components.
+- **Built-in state management**: Handle UI state efficiently.
+
+## 🧩 Components Provided
+
+The `ase_ui` library comes with a variety of pre-built components to make your UI development faster and more efficient. Here's a list of components you can use:
+
+- **App**: The main wrapper for your UI application.
+- **Button**: A customizable button component.
+- **Check**: A checkbox for selecting options.
+- **Combobox**: A dropdown list for selecting one option from a list.
+- **Entry**: A text input field for user input.
+- **Label**: A simple text label.
+- **Newrow**: A component to start a new row in your layout.
+- **Number**: A number input field.
+- **Radio**: A radio button for selecting one option from multiple choices.
+- **Separator**: A horizontal line to separate different sections.
+- **Slider**: A slider for selecting a value within a range.
+- **Color**: A color picker for selecting colors.
+- **Shades**: A component to display shades of a selected color.
+
+## 🛠️ Usage Examples
+
+### 1️⃣ Tap Managers
+
+```typescript
 import { App, Button, Combobox, Separator } from './AseUI/components';
 import { AseComponent } from './AseUI/window/aseComponent';
 
@@ -20,9 +56,7 @@ class Main extends AseComponent {
   run() {
     this.window.template = App({
       title: 'ASEUI',
-      onclose: () => {
-        return;
-      },
+      onclose: () => {},
       children: [
         Separator({
           id: 'ASEUI_separator_setting',
@@ -35,7 +69,7 @@ class Main extends AseComponent {
           option: 'es-ES',
           options: ['es-ES', 'en-US'],
           onchange: () => {
-            /*             print('change', JSON.stringify(this.window.state)); */
+            // Handle language change
           },
         }),
         Button({
@@ -71,9 +105,9 @@ class Main extends AseComponent {
 new Main();
 ```
 
-## Task mananger
+### 2️⃣ Task Manager
 
-```ts
+```typescript
 import { App, Button, Check, Entry, Newrow, Separator } from './AseUI/components';
 import { ComponentFormart, OnEvent } from './AseUI/components/interface';
 import { AseComponent } from './AseUI/window/aseComponent';
@@ -113,9 +147,7 @@ class Main extends AseComponent {
   run() {
     this.window.template = App({
       title: 'TASK MANAGER',
-      onclose: () => {
-        return true;
-      },
+      onclose: () => true,
       children: [
         Separator({
           id: 'actions',
@@ -200,3 +232,74 @@ class Main extends AseComponent {
 
 new Main();
 ```
+
+## 🗂️ Project Structure
+
+Here's the project structure for `ase_ui`:
+
+```bash
+.:
+LICENSE  README.md  asepm-package.json  components  index.ts  luaPlugins  modules.ts  package-lock.json  package.json  src  state  tap  tsconfig.json  tsdoc.json  window
+
+./components:
+index.ts
+
+./luaPlugins:
+serverAseprite
+
+./luaPlugins/serverAseprite:
+index.ts
+
+./src:
+AseUI  debug.ts  main.ts
+
+./src/AseUI:
+components  interface  state  tap  window
+
+./src/AseUI/components:
+app.ts  button.ts  check.ts  color.ts  combobox.ts  component.ts  entry.ts  file.ts  interface.ts  label.ts  newrow.ts  number.ts  radio.ts  separator.ts  shades.ts  slider.ts
+
+./src/AseUI/interface:
+index.ts
+
+./src/AseUI/state:
+components.ts  state.ts
+
+./src/AseUI/tap:
+aseTap.ts  aseTapManager.ts  interface.ts
+
+./src/AseUI/window:
+aseComponent.ts  aseView.ts  aseWindow.ts  interface.ts
+
+./state:
+index.ts
+
+./tap:
+index.ts
+
+./window:
+index.ts
+```
+
+## 🎯 Getting Started
+
+1. **Clone the repository**: 
+   ```bash
+   git clone https://github.com/juandac/ase-ui.git
+   ```
+   
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+   
+3. **Build the project**:
+   ```bash
+   npm run build
+   ```
+
+4. **Start developing**: Explore the `examples` directory for more use cases.
+
+## 📄 License
+
+`ase_ui` is licensed under the MIT License. Feel free to use, modify, and distribute the library as per the terms.
